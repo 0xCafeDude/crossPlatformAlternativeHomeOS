@@ -1,0 +1,11 @@
+proposal/*.aux
+proposal/*.bbl
+proposal/*.blg
+proposal/*.log
+proposal/*.pdf
+
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.pdf
