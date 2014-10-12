@@ -1,45 +1,49 @@
 \documentclass[letterpaper,12pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage[letterpaper, portrait, margin=1.0in]{geometry}
 \usepackage{hyperref}
 
 %opening
-\title{Cross platform alternative to Home OS}
-\author{Christopher Becker, Shivam Kumar Sharma}
+\title{Cross-platform Alternative to HomeOS}
+\author{Christopher Becker and Shivam Kumar Sharma}
 
 \begin{document}
 
 \maketitle
 
 \section{Problem Definition and Motivation}
-Our main goal is to create a cross-platform alternative of Home OS~\cite{homeOS}. Home OS is a PC like abstraction for all the networked devices at home. It presents network devices as peripherals with abstract interfaces, enables cross-device tasks via applications written against these interfaces, and gives users a management interface designed for the home environment. The management interface includes an improved access control. Home OS runs only on windows. We hope to create an alternative that is platform independent and in the process of doing so do somethings differently particularly the access control module or create something new all together.
+Our main goal is to create a cross-platform alternative of HomeOS~\cite{homeOS}. HomeOS is a PC-like abstraction for all the networked devices at home. It presents network devices as peripherals with abstract interfaces, enables cross-device tasks via applications written against these interfaces, and provides users a management interface designed for the home environment. The management interface is designed to provide improved access control. HomeOS runs only on Windows. We hope to create an alternative that is platform-independent and, in the process of doing so, modify aspects of it, particularly the access control module, or create something new all together.
 
 \section{Why we chose this topic}
-We both are interested in working on the internet of things and we also want to do something that is programming heavy and has some tangible outcomes. Creating a cross platform alternative to Home OS fulfills our above mentioned criterias. One of the major contributions of HomeOS is it's access control module and since we both are interested in security it was an added bonus for us.
+Both of us are interested in working on the Internet of Things. We also want to do something that is programming-oriented and has some tangible outcomes. Creating a cross-platform alternative to HomeOS fulfills our above mentioned criteria. One of the major contributions of HomeOS is its access control module. Since we have a mutual interest in security, it is an added bonus for us.
 
 \section{Division of Work}
-We will be working closely on most of the tasks. As of now we don't have a very clear picture of all that needs to be done. Once we have that we will divide the work accordingly.
+We will be working closely on most of the tasks. As of now, we don't have a clear picture of all that needs to be done. Once that is established, we will divide the work accordingly.
 
 \section{Approach}
-Our short term goals are to read more about Home OS, understand the existing code and create a system architecture of the alternative that we are going to develop. Once we have created the system architecture we will start writing the code. We plan to write interfaces for two different devices initially. One of the devices will be one that requires minimal access control for e.g. lights and the other device will be something that has high requirements for access control for e.g. door locks.
+Our short term goals are to read more about HomeOS, understand the existing code, and create a system architecture of the alternative that we are going to develop. Once we have created the system architecture, we will start writing the code. Initially, we plan to write modules for two different devices. One of the devices will be one that requires minimal access control (e.g., lights) and the other device will be something that has high requirements for access control (e.g., door locks).
 
 \section{Evaluation}
-Our evaluation will mostly involve experimentation. We will check if the code works and if it does we will check whether it runs on all the major platforms.
+Our evaluation will mainly involve experimentation and testing. We will check the code to determine whether or not it works. If it works, we will further check to determine whether or not it runs on all the major platforms.
 
 \section{Obstacles}
-The biggest hurdle that we will face is will be in interfacing with various protocol stacks and device drivers. We wil try to interface with just one simple device if that happens. We might face issues in running the code on different platforms. If that happens we will write code only for Ubuntu 14.04.
+The biggest hurdle that we will face will be interfacing with various protocol stacks and device drivers. We will attempt to interface with one simple device if that happens. We are aware that we might face issues in running the code on different platforms. If that happens, we will focus on writing code only for Ubuntu 14.04.
 
 \section{Related Work}
-There is a lot of microsoft research going on in this direction. They have named the research as the \href{http://www.lab-of-things.com/}{Lab of Things}. The Lab of Things consists of the Home OS and a number of cloud services, one of them is the Homestore from where a user can download drivers for different devices. As of now we are creating a replica/alternative of the Home OS. We hope that we that as we go along developing our replica our approach will start deviating from that of Home OS.
+There is a lot of research in this direction by Microsoft.  HomeOS was developed by Microsoft Research.  Since the original system, Microsoft Research has continued to use it for other research. Examples of this continued research are HomeLab~\cite{homeLab} and Lab of Things~\cite{labOfThings}. Lab of Things consists of HomeOS and a number of cloud services. One of these services is the Home Store from which a user can download drivers for different devices. As of now, we are creating a replica/alternative of the HomeOS. Our hope is that as we continue developing our replica, our approach will start deviating from that of HomeOS.
+
+\textbf{Shivam:} Add a brief description of HomeLab.
 
 \section{Milestones}
 These are the list of goals that we have thought of as of now.
-1. Create a system architecture.\newline
-2. Develop device drivers for the devices that we end up getting.\newline
-3. Develop the access control module.\newline
-4. Develop the user interface.\newline
-5. test.\newline
-6. If testing is successful we will try to add new devices and/or try to develop cross device features.
+\begin{enumerate}
+ \item Create a system architecture.
+ \item Develop device drivers for the devices that we have access to.
+ \item Develop the access control module.
+ \item Develop the user interface.
+ \item Test.
+ \item If testing is successful, we will try to add new devices and/or try to develop cross device features.
+\end{enumerate}
 
 \bibliographystyle{plain}
 \bibliography{biblio}
