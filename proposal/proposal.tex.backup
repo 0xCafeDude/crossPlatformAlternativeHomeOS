@@ -1,7 +1,6 @@
 \documentclass[letterpaper,12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[letterpaper, portrait, margin=1in]{geometry}
-\usepackage{hyperref}
 
 %opening
 \title{Cross platform alternative to Home OS}
@@ -11,7 +10,7 @@
 
 \maketitle
 
-\section{Problem Definition and Motivation}
+\section{Problem Definition & Motivation}
 Our main goal is to create a cross-platform alternative of Home OS~\cite{homeOS}. Home OS is a PC like abstraction for all the networked devices at home. It presents network devices as peripherals with abstract interfaces, enables cross-device tasks via applications written against these interfaces, and gives users a management interface designed for the home environment. The management interface includes an improved access control. Home OS runs only on windows. We hope to create an alternative that is platform independent and in the process of doing so do somethings differently particularly the access control module or create something new all together.
 
 \section{Why we chose this topic}
@@ -30,16 +29,7 @@ Our evaluation will mostly involve experimentation. We will check if the code wo
 The biggest hurdle that we will face is will be in interfacing with various protocol stacks and device drivers. We wil try to interface with just one simple device if that happens. We might face issues in running the code on different platforms. If that happens we will write code only for Ubuntu 14.04.
 
 \section{Related Work}
-There is a lot of microsoft research going on in this direction. They have named the research as the \href{http://www.lab-of-things.com/}{Lab of Things}. The Lab of Things consists of the Home OS and a number of cloud services, one of them is the Homestore from where a user can download drivers for different devices. As of now we are creating a replica/alternative of the Home OS. We hope that we that as we go along developing our replica our approach will start deviating from that of Home OS.
-
-\section{Milestones}
-These are the list of goals that we have thought of as of now.
-1. Create a system architecture.\newline
-2. Develop device drivers for the devices that we end up getting.\newline
-3. Develop the access control module.\newline
-4. Develop the user interface.\newline
-5. test.\newline
-6. If testing is successful we will try to add new devices and/or try to develop cross device features.
+There is a lot of microsoft research going on in this direction. They have named the research as the ``\href{http://www.lab-of-things.com/}{Lab of Things}''. The Lab of Things consists of the Home OS and a number of cloud services, one of them is the Homestore from where a user can download drivers for different devices. As of now we are creating a replica/alternative of the Home OS. We hope that we that as we go along developing our replica our approach will start deviating from that of Home OS.
 
 \bibliographystyle{plain}
 \bibliography{biblio}
