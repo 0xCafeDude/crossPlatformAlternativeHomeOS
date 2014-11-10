@@ -1,3 +1,5 @@
+*.swp
+
 proposal/*.aux
 proposal/*.bbl
 proposal/*.blg
@@ -9,3 +11,10 @@ paper/*.bbl
 paper/*.blg
 paper/*.log
 paper/*.pdf
+
+progress reports/*.aux
+progress reports/*.bbl
+progress reports/*.blg
+progress reports/*.log
+progress reports/*.pdf
+progress reports/*.out
