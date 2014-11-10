@@ -4,23 +4,67 @@
 \usepackage{hyperref}
 
 %opening
-\title{Cross-platform Alternative to HomeOS Status Report 1}
+\title{Cross-platform Alternative to HomeOS Related Works}
 \author{Christopher Becker and Shivam Kumar Sharma}
 
 \begin{document}
 
 \maketitle
 
-\section{Progress}
-These are the list of goals that we have thought of as of now.
-\begin{enumerate}
- \item Create a system architecture.
- \item Develop device drivers for the devices that we have access to.
- \item Develop the access control module.
- \item Develop the user interface.
- \item Test.
- \item If testing is successful, we will try to add new devices and/or try to develop cross device features.
-\end{enumerate}
+\section{HomeOS~\cite{homeOS}}
+\begin{description}
+ \item[Title:] An Operating System for the Home
+ \item[Authors:] Colin Dixon, Ratul Mahajan, Sharad Agarwal, AJ Brush, Bongshin Lee, Stefan Saroiu, and Paramvir Bahl
+ \item[Venue/Source:] NSDI 12
+ \item[Year:] 2012
+ \item[Summary:] HomeOS is designed to provide a PC-like abstraction with access control for home automation devices.  Architecture is split into Device Connectivity, Device Functionality, Management, and Application layers.
+ \item[Similarities:] The system we are basing our work on.  Wish to have a similar abstraction.
+ \item[Differences:] Only runs on Windows. We wish to have ours be a cross-platform solution.
+\end{description}
+
+\section{HomeLab~\cite{homeLab}}
+\begin{description}
+ \item[Title:] HomeLab: Shared infrastructure for home technology field studies
+ \item[Authors:] AJ Brush, Jaeyeon Jung, Ratul Mahajan, and James Scott
+ \item[Venue/Source:] HomeSys
+ \item[Year:] 2012
+ \item[Summary:] Tries to set up a PlanetLab-like home automation testbed using HomeOS as the underlying system. Required modifications to HomeOS to provide isolation for experiments.
+ \item[Similarities:] Basically an extended version of HomeOS.
+ \item[Differences:] Again, only works on Windows.  Focus on adding the ability to run field experiments.
+\end{description}
+
+\section{Lab of Things~\cite{labOfThings}}
+\begin{description}
+ \item[Title:] Lab of Things: A Platform for Conducting Studies with Connected Devices in Multiple Homes
+ \item[Authors:] A.J. Bernheim Brush, Evgeni Filippov, Danny Huang, Jaeyeon Jung, Ratul Mahajan, Frank Martinez, Khurshed Mazhar, Amar Phanishayee, Arjmand Samuel, James Scott, and Rayman Preet Singh
+ \item[Venue/Source:] UbiComp 2013 Adjunct Proceedings
+ \item[Year:] 2013
+ \item[Summary:] An update to HomeLab.
+ \item[Similarities:] The currently maintained version of HomeOS by Microsoft.
+ \item[Differences:] Again, only works on Windows and running field experiments.
+\end{description}
+
+\section{The Current State of Access Control for Smart Devices in Homes~\cite{currentState}}
+\begin{description}
+ \item[Title:] The Current State of Access Control for Smart Devices in Homes
+ \item[Authors:] Blase Ur, Jaeyeon Jung, and Stuart Schechter
+ \item[Venue/Source:] Workshop on Home Usable Privacy and Security (HUPS)
+ \item[Year:] 2013
+ \item[Summary:] An analysis of access control needs for an LED color-changing light bulb, wireless scale, and wireless keypad door lock with suggestions for access control requirements.
+ \item[Similarities:] May use information from this paper to guide changes to our version of the access control part of our system from the access control mechanisms used in HomeOS.
+ \item[Differences:] Analyzed device access control requirements individually, no analysis when using a central controller.
+\end{description}
+
+\section{Computer Security and the Modern Home~\cite{modernHome}}
+\begin{description}
+ \item[Title:] Computer Security and the Modern Home
+ \item[Authors:] Tamara Denning, Tadayoshi Kohno, and Henry Levy
+ \item[Venue/Source:] Communications of the ACM
+ \item[Year:] 2013
+ \item[Summary:] Provides an overview of security and privacy issues related to home automation and Internet of Things devices.
+ \item[Similarities:] Attempts to deal with security and privacy issues.
+ \item[Differences:] Concerned with physical security of the devices which is out of the scope of our project.
+\end{description}
 
 \bibliographystyle{plain}
 \bibliography{biblio}
