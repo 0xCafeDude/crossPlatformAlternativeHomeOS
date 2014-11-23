@@ -1,0 +1,236 @@
+Driver ready
+	home id: 25494432
+Node added
+	node id: 1
+Node protocol info
+	node id: 1
+	type: Static PC Controller
+Node essential queries complete
+	node id: 1
+Value added
+	node id: 1
+	command class: 32
+	instance: 1
+	index: 0
+	genre: BASIC
+	type: BYTE
+	label: Basic
+	value: 0
+Node naming
+	node id: 1
+Node added
+	node id: 3
+Node protocol info
+	node id: 3
+	type: Multilevel Power Switch
+Node essential queries complete
+	node id: 3
+Value added
+	node id: 3
+	command class: 38
+	instance: 1
+	index: 5
+	genre: SYSTEM
+	type: BYTE
+	label: Dimming Duration
+	value: 255
+Value added
+	node id: 3
+	command class: 38
+	instance: 1
+	index: 0
+	genre: USER
+	type: BYTE
+	label: Level
+	value: 2
+Value added
+	node id: 3
+	command class: 38
+	instance: 1
+	index: 1
+	genre: USER
+	type: BUTTON
+	label: Bright
+	value: null
+Value added
+	node id: 3
+	command class: 38
+	instance: 1
+	index: 2
+	genre: USER
+	type: BUTTON
+	label: Dim
+	value: null
+Value added
+	node id: 3
+	command class: 38
+	instance: 1
+	index: 3
+	genre: SYSTEM
+	type: BOOL
+	label: Ignore Start Level
+	value: true
+Value added
+	node id: 3
+	command class: 38
+	instance: 1
+	index: 4
+	genre: SYSTEM
+	type: BYTE
+	label: Start Level
+	value: 0
+Value added
+	node id: 3
+	command class: 112
+	instance: 1
+	index: 1
+	genre: CONFIG
+	type: BYTE
+	label: RGB Color
+	value: 50
+Value added
+	node id: 3
+	command class: 115
+	instance: 1
+	index: 0
+	genre: SYSTEM
+	type: LIST
+	label: Powerlevel
+	value: null
+Value added
+	node id: 3
+	command class: 115
+	instance: 1
+	index: 1
+	genre: SYSTEM
+	type: BYTE
+	label: Timeout
+	value: 0
+Value added
+	node id: 3
+	command class: 115
+	instance: 1
+	index: 2
+	genre: SYSTEM
+	type: BUTTON
+	label: Set Powerlevel
+	value: null
+Value added
+	node id: 3
+	command class: 115
+	instance: 1
+	index: 3
+	genre: SYSTEM
+	type: BYTE
+	label: Test Node
+	value: 0
+Value added
+	node id: 3
+	command class: 115
+	instance: 1
+	index: 4
+	genre: SYSTEM
+	type: LIST
+	label: Test Powerlevel
+	value: null
+Value added
+	node id: 3
+	command class: 115
+	instance: 1
+	index: 5
+	genre: SYSTEM
+	type: BYTE
+	label: Frame Count
+	value: 0
+Value added
+	node id: 3
+	command class: 115
+	instance: 1
+	index: 6
+	genre: SYSTEM
+	type: BUTTON
+	label: Test
+	value: null
+Value added
+	node id: 3
+	command class: 115
+	instance: 1
+	index: 7
+	genre: SYSTEM
+	type: BUTTON
+	label: Report
+	value: null
+Value added
+	node id: 3
+	command class: 115
+	instance: 1
+	index: 8
+	genre: SYSTEM
+	type: LIST
+	label: Test Status
+	value: null
+Value added
+	node id: 3
+	command class: 115
+	instance: 1
+	index: 9
+	genre: SYSTEM
+	type: BYTE
+	label: Acked Frames
+	value: 0
+Group
+	node id: 3
+	group id: 1
+Value added
+	node id: 3
+	command class: 134
+	instance: 1
+	index: 0
+	genre: SYSTEM
+	type: STRING
+	label: Library Version
+	value: 3
+Value added
+	node id: 3
+	command class: 134
+	instance: 1
+	index: 1
+	genre: SYSTEM
+	type: STRING
+	label: Protocol Version
+	value: 3.92
+Value added
+	node id: 3
+	command class: 134
+	instance: 1
+	index: 2
+	genre: SYSTEM
+	type: STRING
+	label: Application Version
+	value: 1.06
+Node naming
+	node id: 3
+Notification
+Node queries complete
+	node id: 1
+Value changed
+	node id: 3
+	command class: 115
+	instance: 1
+	index: 0
+	value: null
+Value changed
+	node id: 3
+	command class: 115
+	instance: 1
+	index: 1
+	value: 0
+Value changed
+	node id: 3
+	command class: 38
+	instance: 1
+	index: 0
+	value: 2
+Node queries complete
+	node id: 3
+All nodes queried
