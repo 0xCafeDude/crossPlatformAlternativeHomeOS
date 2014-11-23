@@ -18,3 +18,12 @@ progress reports/*.blg
 progress reports/*.log
 progress reports/*.pdf
 progress reports/*.out
+
+related works/*.aux
+related works/*.bbl
+related works/*.blg
+related works/*.log
+related works/*.pdf
+related works/*.out
+
+src/Test.java
