@@ -271,10 +271,58 @@ public class Test {
                     break;
                 case "test":
                 	short light = 3;
-                	System.out.println(manager.getNodeManufacturerName(homeId, light));
-                	//manager.setNodeOn(homeId, light);
-                	System.out.println(manager.isNodeAwake(homeId, light));
-                	manager.setValueAsByte(new ValueId(homeId, light, ValueGenre.USER, (short)38, (short)1,(short)0, ValueType.BYTE), (short)0);
+                	/*System.out.println(manager.getValueHelp(new ValueId(homeId, light, ValueGenre.SYSTEM, (short)115, (short)1, (short)0, ValueType.LIST)));
+                	System.out.println(manager.getValueMax(new ValueId(homeId, light, ValueGenre.SYSTEM, (short)115, (short)1, (short)0, ValueType.LIST)));
+                	System.out.println(manager.getValueMin(new ValueId(homeId, light, ValueGenre.SYSTEM, (short)115, (short)1, (short)0, ValueType.LIST)));
+                	System.out.println(manager.getValueHelp(new ValueId(homeId, light, ValueGenre.SYSTEM, (short)115, (short)1, (short)2, ValueType.LIST)));
+                	System.out.println(manager.getValueMax(new ValueId(homeId, light, ValueGenre.SYSTEM, (short)115, (short)1, (short)2, ValueType.LIST)));
+                	System.out.println(manager.getValueMin(new ValueId(homeId, light, ValueGenre.SYSTEM, (short)115, (short)1, (short)2, ValueType.LIST)));*/
+            		System.out.println(manager.getValueHelp(new ValueId(homeId, light, ValueGenre.USER, (short)38, (short)1, (short)0, ValueType.BYTE)));
+            		System.out.println(manager.getValueMax(new ValueId(homeId, light, ValueGenre.USER, (short)38, (short)1, (short)0, ValueType.BYTE)));
+            		System.out.println(manager.getValueMin(new ValueId(homeId, light, ValueGenre.USER, (short)38, (short)1, (short)0, ValueType.BYTE)));
+                	while (true) {
+                		System.out.println("Enter 1 to turn on 0 to turn off");
+                		line = br.readLine();
+                		short onOff = Short.parseShort(line);
+                		/*System.out.println("Play with instance 2");
+                		line = br.readLine();
+                		short instance2 = Short.parseShort(line);*/
+                		System.out.println("Enter color value between 1 to 100");
+                		line = br.readLine();
+                		short color = Short.parseShort(line);
+                		System.out.println("Hack the color");
+                		line = br.readLine();
+                		short hackColor = Short.parseShort(line);
+                		/*System.out.println("Enter powerlevel");
+                		line = br.readLine();
+                		short powerlevel = Short.parseShort(line);*/
+                    	//System.out.println(manager.getNodeManufacturerName(homeId, light));
+                    	//manager.setNodeOn(homeId, light);
+                    	//System.out.println(manager.isNodeAwake(homeId, light));
+                		// default was null
+                		/*if (powerlevel == 1){
+                			manager.pressButton(new ValueId(homeId, light, ValueGenre.SYSTEM, (short)115, (short)1, (short)2, ValueType.BUTTON));
+                		}
+                		if (powerlevel == 2) {
+                			manager.releaseButton(new ValueId(homeId, light, ValueGenre.SYSTEM, (short)115, (short)1, (short)2, ValueType.BUTTON));
+                		}*/
+                    	// default value was 0
+                		if (onOff != -1)
+                			manager.setValueAsByte(new ValueId(homeId, light, ValueGenre.USER, (short)38, (short)1,(short)0, ValueType.BYTE), onOff);
+                		if (hackColor >= 0 && hackColor <= 4)
+                			manager.setValueAsByte(new ValueId(homeId, light, ValueGenre.USER, (short)38, (short)1,(short)9, ValueType.BYTE), hackColor);
+                		/*if (instance2 != -1) {
+                			manager.setValueAsByte(new ValueId(homeId, light, ValueGenre.USER, (short)38, (short)2,(short)0, ValueType.BYTE), instance2);	
+                		}*/
+                    	//default value was 50
+                		if (color != -1)
+                			manager.setValueAsByte(new ValueId(homeId, light, ValueGenre.CONFIG, (short)112, (short)1,(short)1, ValueType.BYTE), color);
+                    	System.out.println("Enter q to quit");
+                    	line = br.readLine();
+                    	if (line != null && line.equals("q")) {
+                			break;
+                		}
+                	}
                 	break;
             }
         } while(line != null && !line.equals("q"));
