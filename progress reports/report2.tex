@@ -1,0 +1,26 @@
+\documentclass[letterpaper,12pt]{article}
+\usepackage[utf8]{inputenc}
+%\usepackage[letterpaper, portrait, margin=1.0in]{geometry}
+\usepackage{hyperref}
+
+%opening
+\title{Cross-platform Alternative to HomeOS Status Report 2}
+\author{Christopher Becker and Shivam Kumar Sharma}
+
+\begin{document}
+
+\maketitle
+
+\section*{Progress}
+Since then last checkin we have done the following:
+\begin{enumerate}
+ \item We decided that for now we will support only zwave protocol. For all zwave specific functions we are using OpenZWave library. The library has been written in C++. There is a project on GitHub zwave4j where the author has created java wrapper classes for all the classes in OpenZWave. We decided to use these wrapper classes so that our Java based system can communicate with C++ based OpenZWave library. We faced a lot of difficulty in building zwave4j. If the OpenZWave directoy has been built. Building zwave4j gives error. After a lot of head scratching and googling Christopher was able to figure this out.
+ \item Once we had built zwave4j. We developed a basic program to communicate with the light bulb. We are able to turn on/off the bulb, control it's brightness but we are not able to change it's color. After researching a little we found out that the light bulb device that we have implements a zwave class called as ColorControl for controlling it's color. The class is not supporte by OpenZWave yet. I wrote a small code to get around that but I was not successful in changing the color. Since it's not very important for our project to be able to change the color of the light bulb we decided to drop pursuing it for now.
+ \item We have created an initial architecture of the system.
+\end{enumerate}
+On almost everything we worked together as much as possible.
+
+We were able to achieve the goal that we had planned to accomplish at the previous project status report.
+
+For the upcoming week our main goal is to finish coding the system. Since we have played around with zwave and the light bulb we feel we should be able to quickly code related aspects of our system. The main challenge will be in developing the access control related modules.
+\end{document}
