@@ -6,6 +6,7 @@
 package edu.utah.cs6964;
 
 import edu.utah.cs6964.drivers.zipato.*;
+import edu.utah.cs6964.management.access.Group;
 import edu.utah.cs6964.management.access.User;
 import edu.utah.cs6964.management.backend.DataBackend;
 import edu.utah.cs6964.management.backend.MySQLBackend;
@@ -121,6 +122,44 @@ public class MainTest {
         }
         
         ArrayList<User> users = backend.getUsers();
+        
+        if(debug)
+        {
+            System.out.println("Users:");
+            for(User u : users)
+            {
+                System.out.println("\tName: " + u.getFirstName() + " " + u.getLastName());
+                System.out.println("\t\tID: " + u.getId());
+                System.out.println("\t\tUsername: " + u.getUsername());
+                System.out.println("\t\tAccess Level: " + u.getAccessLevel());
+                System.out.print("\t\tGroup IDs: ");
+                for(int i = 0; i < u.getGroups().size(); ++i)
+                {
+                    System.out.print(u.getGroups().get(i));
+                    if(i < u.getGroups().size() - 1)
+                    {
+                        System.out.print(" ");
+                    }
+                    else
+                    {
+                        System.out.println();
+                    }
+                }
+                
+            }
+        }
+        
+        ArrayList<Group> groups = backend.getGroups();
+        
+        if(debug)
+        {
+            System.out.println("Groups:");
+            for(Group g : groups)
+            {
+                System.out.println("\tName: " + g.getName());
+                System.out.println("\t\tID: " + g.getId());
+            }
+        }
         
         Method defaultMethods[] = Object.class.getDeclaredMethods();
         

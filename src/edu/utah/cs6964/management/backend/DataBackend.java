@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public interface DataBackend {
     public ArrayList<User> getUsers();
-    public User getUser(String name);
+    public User getUser(String username);
     public User getUser(int id);
     public ArrayList<Group> getGroups();
     public Group getGroup(String name);

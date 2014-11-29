@@ -68,8 +68,19 @@ public class MySQLBackend implements DataBackend {
     }
 
     @Override
-    public User getUser(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public User getUser(String username) {
+        try {
+            Statement query = con.createStatement();
+            ResultSet results = query.executeQuery("Select `ID` from `Users` WHERE `Username` = '" + username + "' LIMIT 1");
+            if(results.next())
+            {
+                return getUser(results.getInt(1));
+            }
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLBackend.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
@@ -80,15 +91,11 @@ public class MySQLBackend implements DataBackend {
             if(results.next())
             {
                 Statement query2 = con.createStatement();
-                ResultSet results2 = query.executeQuery("Select `GroupID` from `XREF_Users_Groups` where `UserID` = " + id);
-                ArrayList<Group> groups = new ArrayList<Group>();
+                ResultSet results2 = query2.executeQuery("Select `GroupID` from `XREF_Users_Groups` where `UserID` = " + id);
+                ArrayList<Integer> groups = new ArrayList<Integer>();
                 while(results2.next())
                 {
-                    Group tempGroup = getGroup(results2.getInt(1));
-                    if(tempGroup != null)
-                    {
-                        groups.add(tempGroup);
-                    }
+                    groups.add(results2.getInt(1));
                 }
                 return new User(results.getInt("ID"), results.getString("Username"),
                                 results.getString("FirstName"), results.getString("LastName"),
@@ -102,21 +109,53 @@ public class MySQLBackend implements DataBackend {
 
     @Override
     public ArrayList<Group> getGroups() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Group> returnValue = new ArrayList<Group>();
+        try {
+            Statement query = con.createStatement();
+            ResultSet results = query.executeQuery("Select `ID` from `Groups`");
+            while(results.next())
+            {
+                Group tempGroup = getGroup(results.getInt(1));
+                if(null != tempGroup)
+                {
+                    returnValue.add(tempGroup);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLBackend.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return returnValue;
     }
 
     @Override
     public Group getGroup(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Statement query = con.createStatement();
+            ResultSet results = query.executeQuery("Select `ID` from `Groupss` WHERE `name` = '" + name + "' LIMIT 1");
+            if(results.next())
+            {
+                return getGroup(results.getInt(1));
+            }
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLBackend.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
     public Group getGroup(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    protected ArrayList<Group> getGroupsForUser(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Statement query = con.createStatement();
+            ResultSet results = query.executeQuery("Select * from `Groups` WHERE `ID` = " + id + " LIMIT 1");
+            if(results.next())
+            {
+                return new Group(results.getInt("ID"), results.getString("Name"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLBackend.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override

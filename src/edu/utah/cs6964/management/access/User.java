@@ -18,9 +18,9 @@ public class User {
     private String firstName;
     private String lastName;
     private byte accessLevel;
-    private ArrayList<Group> groups;
+    private ArrayList<Integer> groups;
     
-    public User(int id, String username, String firstName, String lastName, byte accessLevel, ArrayList<Group> groups)
+    public User(int id, String username, String firstName, String lastName, byte accessLevel, ArrayList<Integer> groups)
     {
         this.id = id;
         this.username = username;
@@ -50,7 +50,7 @@ public class User {
         return this.accessLevel;
     }
 
-    public ArrayList<Group> getGroups() {
+    public ArrayList<Integer> getGroups() {
         return this.groups;
     }
     
