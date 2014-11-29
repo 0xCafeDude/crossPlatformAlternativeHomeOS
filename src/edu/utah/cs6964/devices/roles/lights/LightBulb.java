@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.utah.cs6964.devices.lights;
+package edu.utah.cs6964.devices.roles.lights;
 
 /**
  *
  * @author christopher
  */
-public interface DimmingLightBulb extends LightBulb {
-    public int getLevel();
-    public void setLevel(int level);
-    public int getMinLevel();
-    public int getMaxLevel();
+public interface LightBulb extends edu.utah.cs6964.devices.Device {
+    public void turnOn();
+    public void turnOff();
+    
 }

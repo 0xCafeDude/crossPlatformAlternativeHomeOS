@@ -5,13 +5,16 @@
  */
 package edu.utah.cs6964.devices;
 
+import java.util.List;
+
 /**
  *
  * @author christopher
  */
-public interface Device {
+public interface Device {	
     public String getName();
     public String getManufacturer();
     public String getId();
     public void setId(String id);
+    public List<String> getRoles();
 }

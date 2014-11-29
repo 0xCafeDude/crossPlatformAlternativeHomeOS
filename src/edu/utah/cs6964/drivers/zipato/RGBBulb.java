@@ -5,17 +5,24 @@
  */
 package edu.utah.cs6964.drivers.zipato;
 
+import java.util.List;
+
+import edu.utah.cs6964.connectivity.Connection;
+
 /**
  *
  * @author christopher
  */
-public class RGBBulb implements edu.utah.cs6964.devices.lights.DimmingLightBulb {
+public class RGBBulb implements edu.utah.cs6964.devices.roles.lights.DimmingLightBulb {
 
     public RGBBulb(String id) {
         this.id = id;
+        this.roles.add("DimmingLightBulb");
     }
     
     private String id;
+    private List<String> roles;
+    private Connection conn;
     
     @Override
     public String getId() {
@@ -66,6 +73,11 @@ public class RGBBulb implements edu.utah.cs6964.devices.lights.DimmingLightBulb 
     @Override
     public int getMaxLevel() {
         return 100;
+    }
+    
+    @Override
+    public List<String> getRoles() {
+    	return roles;
     }
 
 }
