@@ -9,6 +9,7 @@ import java.util.List;
 
 import edu.utah.cs6964.connectivity.Connection;
 import edu.utah.cs6964.connectivity.Protocols;
+import edu.utah.cs6964.connectivity.protocols.ZWave;
 
 /**
  *
@@ -25,7 +26,7 @@ public class RGBBulb implements edu.utah.cs6964.devices.roles.lights.DimmingLigh
     private List<String> roles;
     private String networkId;
     private boolean active;
-    private Connection conn;
+    private ZWave conn;
     
     @Override
     public String getId() {
@@ -50,12 +51,12 @@ public class RGBBulb implements edu.utah.cs6964.devices.roles.lights.DimmingLigh
 
     @Override
     public void turnOn() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    	conn.setLevel(this, (short)20);
     }
 
     @Override
     public void turnOff() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    	conn.setLevel(this, (short)0);
     }
     
     @Override
@@ -65,17 +66,17 @@ public class RGBBulb implements edu.utah.cs6964.devices.roles.lights.DimmingLigh
 
     @Override
     public void setLevel(int level) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    	conn.setLevel(this, (short)level);
     }
 
     @Override
     public int getMinLevel() {
-        return 0;
+        return conn.getMinLevel(this);
     }
     
     @Override
     public int getMaxLevel() {
-        return 100;
+        return conn.getMaxLevel(this);
     }
     
     @Override
@@ -152,6 +153,6 @@ public class RGBBulb implements edu.utah.cs6964.devices.roles.lights.DimmingLigh
 
 	@Override
 	public void setConnection(Connection conn) {
-		this.conn = conn;
+		this.conn = (ZWave)conn;
 	}
 }

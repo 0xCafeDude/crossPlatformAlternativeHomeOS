@@ -5,6 +5,8 @@
  */
 package edu.utah.cs6964.connectivity.protocols;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 import org.zwave4j.Manager;
 import org.zwave4j.NativeLibraryLoader;
 import org.zwave4j.Notification;
@@ -115,4 +117,17 @@ public class ZWave implements edu.utah.cs6964.connectivity.Connection {
     	return manager.setValueAsByte(new ValueId(homeId, Short.parseShort(d.getId()), ValueGenre.USER, (short)38, (short)1,(short)0, ValueType.BYTE), level);
     }
     
+    public short getLevel(Device d) {
+    	AtomicReference<Short> level = new AtomicReference<Short>();
+    	manager.getValueAsByte(new ValueId(homeId, Short.parseShort(d.getId()), ValueGenre.USER, (short)38, (short)1,(short)0, ValueType.BYTE), level);
+    	return level.get();
+    }
+    
+    public int getMaxLevel(Device d) {
+    	return manager.getValueMax(new ValueId(homeId, Short.parseShort(d.getId()), ValueGenre.USER, (short)38, (short)1,(short)0, ValueType.BYTE));
+    }
+    
+    public int getMinLevel(Device d) {
+    	return manager.getValueMin(new ValueId(homeId, Short.parseShort(d.getId()), ValueGenre.USER, (short)38, (short)1,(short)0, ValueType.BYTE));
+    }
 }
