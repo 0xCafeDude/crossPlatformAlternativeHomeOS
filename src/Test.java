@@ -280,6 +280,7 @@ public class Test {
             		System.out.println(manager.getValueHelp(new ValueId(homeId, light, ValueGenre.USER, (short)38, (short)1, (short)0, ValueType.BYTE)));
             		System.out.println(manager.getValueMax(new ValueId(homeId, light, ValueGenre.USER, (short)38, (short)1, (short)0, ValueType.BYTE)));
             		System.out.println(manager.getValueMin(new ValueId(homeId, light, ValueGenre.USER, (short)38, (short)1, (short)0, ValueType.BYTE)));
+            		System.out.println(" node name "+manager.getNodeProductName(homeId, light));
                 	while (true) {
                 		System.out.println("Enter 1 to turn on 0 to turn off");
                 		line = br.readLine();

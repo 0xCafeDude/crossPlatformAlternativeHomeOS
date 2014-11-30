@@ -5,11 +5,12 @@
  */
 package edu.utah.cs6964;
 
-import edu.utah.cs6964.drivers.zipato.*;
 import edu.utah.cs6964.management.access.Group;
+import edu.utah.cs6964.devices.zwave.*;
 import edu.utah.cs6964.management.access.User;
 import edu.utah.cs6964.management.backend.DataBackend;
 import edu.utah.cs6964.management.backend.MySQLBackend;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.FileNotFoundException;

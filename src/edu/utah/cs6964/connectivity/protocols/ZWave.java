@@ -16,6 +16,8 @@ import org.zwave4j.ValueType;
 import org.zwave4j.ZWave4j;
 
 import edu.utah.cs6964.devices.Device;
+import edu.utah.cs6964.devices.DeviceFactory;
+import edu.utah.cs6964.devices.zwave.DeviceFactoryZWave;
 
 /**
  *
@@ -26,8 +28,17 @@ public class ZWave implements edu.utah.cs6964.connectivity.Connection {
 	private long homeId;
 	private boolean READY= false, POLLING_ENABLED = false;
 	private Manager manager;
+	private DeviceFactory zwaveDeviceFactory = new DeviceFactoryZWave();
+	private static ZWave zwaveInstance = null;
 	
-	public ZWave() {
+	public static ZWave getInstance() {
+		if (zwaveInstance == null) {
+			zwaveInstance = new ZWave();
+		}
+		return zwaveInstance;
+	}
+	
+	private ZWave() {
 		NativeLibraryLoader.loadLibrary(ZWave4j.LIBRARY_NAME, ZWave4j.class);
 
         final Options options = Options.create("/home/shivam/open-zwave2/config", "", "");
@@ -39,6 +50,7 @@ public class ZWave implements edu.utah.cs6964.connectivity.Connection {
         final NotificationWatcher watcher = new NotificationWatcher() {
             @Override
             public void onNotification(Notification notification, Object context) {
+            	short nodeId;
                 switch (notification.getType()) {
                     case DRIVER_READY:
                         homeId = notification.getHomeId();
@@ -64,16 +76,12 @@ public class ZWave implements edu.utah.cs6964.connectivity.Connection {
                     	POLLING_ENABLED = false;
                         break;
                     case NODE_NEW:
-                        System.out.println(String.format("Node new\n" +
-                                "\tnode id: %d",
-                                notification.getNodeId()
-                        ));
+                        nodeId = notification.getNodeId();
+                        addNode(nodeId);
                         break;
                     case NODE_ADDED:
-                        System.out.println(String.format("Node added\n" +
-                                "\tnode id: %d",
-                                notification.getNodeId()
-                        ));
+                    	nodeId = notification.getNodeId();
+                        addNode(nodeId);
                         break;
                     case NODE_REMOVED:
                         System.out.println(String.format("Node removed\n" +
@@ -82,6 +90,13 @@ public class ZWave implements edu.utah.cs6964.connectivity.Connection {
                         ));
                         break;
                 }
+            }
+            
+            private void addNode(Short nodeId) {
+            	String manufacturerName, nodeName;
+            	manufacturerName = manager.getNodeManufacturerName(homeId, nodeId);
+                nodeName = manager.getNodeProductName(homeId, nodeId);
+                zwaveDeviceFactory.addDevice(new ZWaveNode(Short.toString(nodeId), nodeName, manufacturerName));
             }
         };
         manager.addWatcher(watcher, null);
