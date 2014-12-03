@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.utah.cs6964.management;
+package edu.utah.cs6964.management.interfaces;
 
+import edu.utah.cs6964.management.Core;
 import edu.utah.cs6964.management.access.User;
 import edu.utah.cs6964.management.backend.DataBackend;
 import edu.utah.cs6964.management.backend.MySQLBackend;
@@ -106,23 +107,27 @@ public class CLI {
             throw new Error("No valid backend found");
         }
         
+        Core c = Core.getInstance();
+        c.setBackend(backend);
+        
         Console in = System.console();
-        User user = null;
+        
         boolean firstTime = true;
-        while(null == user)
+        String username, password;
+        do
         {
             if(!firstTime)
             {
                 System.out.println("Login Failed");
             }
             System.out.println("Enter Username:");
-            String username = in.readLine();
+            username = in.readLine();
             System.out.println("Enter Password:");
-            String password = new String(in.readPassword());
+            password = new String(in.readPassword());
 
-            user = backend.loginUser(username, password);
             firstTime = false;
-        }
-            
+        } while(!c.loginUser(username, password));
+        
+        System.out.println("Welcome " + c.getLoggedInUser().getFirstName() + " " + c.getLoggedInUser().getLastName());
     }
 }
