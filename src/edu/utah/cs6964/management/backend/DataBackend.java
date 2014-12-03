@@ -21,6 +21,6 @@ public interface DataBackend {
     public ArrayList<Group> getGroups();
     public Group getGroup(String name);
     public Group getGroup(int id);
-    public ArrayList<User> getUsersForGroup(int id);
+    public ArrayList<Integer> getUsersForGroup(int id);
     public Map<Byte, String> getAccessLevels();
 }

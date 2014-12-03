@@ -1,0 +1,5 @@
+backend=mysql
+dbName=
+dbHost=
+dbUser=
+dbPass=

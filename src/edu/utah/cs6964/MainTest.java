@@ -19,6 +19,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -159,6 +160,34 @@ public class MainTest {
             {
                 System.out.println("\tName: " + g.getName());
                 System.out.println("\t\tID: " + g.getId());
+            }
+        }
+        
+        Map<Byte, String> accessLevels = backend.getAccessLevels();
+        
+        if(debug)
+        {
+            System.out.println("System Access Levels:");
+            for(Map.Entry<Byte, String> level : accessLevels.entrySet())
+            {
+                System.out.println("\t" + level.getKey() + ": " + level.getValue());
+            }
+        }
+        
+        if(debug)
+        {
+            System.out.println("Users in Groups:");
+        }
+        for(Group g : groups)
+        {
+            ArrayList<Integer> userIDs = backend.getUsersForGroup(g.getId());
+            if(debug)
+            {
+                System.out.println("\t" + g.getName() + ":");
+                for(int i = 0; i < userIDs.size(); ++i)
+                {
+                    System.out.println("\t\t" + userIDs.get(i));
+                }
             }
         }
         

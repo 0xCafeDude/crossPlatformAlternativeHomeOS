@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -159,13 +160,35 @@ public class MySQLBackend implements DataBackend {
     }
 
     @Override
-    public ArrayList<User> getUsersForGroup(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Integer> getUsersForGroup(int id) {
+        ArrayList<Integer> returnValue = new ArrayList<Integer>();
+        try {
+            Statement query = con.createStatement();
+            ResultSet results = query.executeQuery("Select `UserID` from `XREF_Users_Groups` where `GroupID` = " + id);
+            while(results.next())
+            {
+                returnValue.add(results.getInt(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLBackend.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return returnValue;
     }
 
     @Override
     public Map<Byte, String> getAccessLevels() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<Byte, String> returnValue = new HashMap<Byte, String>();
+        try {
+            Statement query = con.createStatement();
+            ResultSet results = query.executeQuery("Select * from `AccessLevels` ORDER BY `Level` ASC");
+            while(results.next())
+            {
+                returnValue.put(results.getByte("Level"), results.getString("Name"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQLBackend.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return returnValue;
     }
     
 }
