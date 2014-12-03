@@ -310,8 +310,77 @@ public class Test {
                     	// default value was 0
                 		if (onOff != -1)
                 			manager.setValueAsByte(new ValueId(homeId, light, ValueGenre.USER, (short)38, (short)1,(short)0, ValueType.BYTE), onOff);
-                		if (hackColor >= 0 && hackColor <= 4)
-                			manager.setValueAsByte(new ValueId(homeId, light, ValueGenre.USER, (short)38, (short)1,(short)9, ValueType.BYTE), hackColor);
+                		/*hackColor = 1;
+                		for (int i=0;i<100;i++) {
+                			hackColor++;*/
+                			if (hackColor >= 2){
+                    			short[] temp = new short[6];
+                    			if (hackColor == 2){
+                    				temp[0] = 2;
+                    				temp[1] = 255;
+                    				temp[2] = 3;
+                    				temp[3] = 0;
+                    				temp[4] = 4;
+                    				temp[5] = 0;
+                    			} else if (hackColor == 3) {
+                    				temp[0] = 2;
+                    				temp[1] = 0;
+                    				temp[2] = 3;
+                    				temp[3] = 255;
+                    				temp[4] = 4;
+                    				temp[5] = 0;
+                    			}else if (hackColor == 4) {
+                    				temp[0] = 2;
+                    				temp[1] = 0;
+                    				temp[2] = 3;
+                    				temp[3] = 0;
+                    				temp[4] = 4;
+                    				temp[5] = 255;
+                    			} else if (hackColor == 5) {
+                    				temp[0] = 2;
+                    				temp[1] = 255;
+                    				temp[2] = 3;
+                    				temp[3] = 0;
+                    				temp[4] = 4;
+                    				temp[5] = 255;
+                    			} else if (hackColor == 6) {
+                    				temp[0] = 2;
+                    				temp[1] = 255;
+                    				temp[2] = 3;
+                    				temp[3] = 255;
+                    				temp[4] = 4;
+                    				temp[5] = 255;
+                    			} else if (hackColor == 7) {
+                    				temp[0] = 2;
+                    				temp[1] = 255;
+                    				temp[2] = 3;
+                    				temp[3] = 153;
+                    				temp[4] = 4;
+                    				temp[5] = 51;
+                    			} else if (hackColor == 8) {
+                    				temp[0] = 2;
+                    				temp[1] = 51;
+                    				temp[2] = 3;
+                    				temp[3] = 255;
+                    				temp[4] = 4;
+                    				temp[5] = 51;
+                    			} else if (hackColor == 9) {
+                    				temp[0] = 2;
+                    				temp[1] = 0;
+                    				temp[2] = 3;
+                    				temp[3] = 0;
+                    				temp[4] = 4;
+                    				temp[5] = 0;
+                    				hackColor = 1;
+                    			}
+                    			manager.setValueAsRaw(new ValueId(homeId, light, ValueGenre.USER, (short)51, (short)1,(short)0, ValueType.RAW), temp);
+                    			/*try {
+									Thread.sleep(1000);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}*/
+                		}
+                		//}
                 		/*if (instance2 != -1) {
                 			manager.setValueAsByte(new ValueId(homeId, light, ValueGenre.USER, (short)38, (short)2,(short)0, ValueType.BYTE), instance2);	
                 		}*/
