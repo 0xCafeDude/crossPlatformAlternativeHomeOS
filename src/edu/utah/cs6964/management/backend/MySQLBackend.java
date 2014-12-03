@@ -7,6 +7,8 @@ package edu.utah.cs6964.management.backend;
 
 import edu.utah.cs6964.management.access.Group;
 import edu.utah.cs6964.management.access.User;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -189,6 +191,37 @@ public class MySQLBackend implements DataBackend {
             Logger.getLogger(MySQLBackend.class.getName()).log(Level.SEVERE, null, ex);
         }
         return returnValue;
+    }
+
+    @Override
+    public User loginUser(String username, String password) {
+        try {
+            Statement query = con.createStatement();
+            ResultSet results = query.executeQuery("Select `ID` from `Users` WHERE sha1(`username`) = '" + SHA1(username) + "' AND  `password` = '" + SHA1(password) + "' LIMIT 1");
+            if(results.next())
+            {
+                return getUser(results.getInt(1));
+            }
+            return null;
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(MySQLBackend.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(MySQLBackend.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    private String SHA1(String input) throws NoSuchAlgorithmException
+    {
+        MessageDigest sha1 = MessageDigest.getInstance("SHA1");
+        byte[] result = sha1.digest(input.getBytes());
+        StringBuffer sb = new StringBuffer();
+        for(int i = 0; i < result.length; ++i)
+        {
+            sb.append(Integer.toString((result[i] & 0xFF) + 0x100, 16).substring(1));
+        }
+        return sb.toString();
     }
     
 }

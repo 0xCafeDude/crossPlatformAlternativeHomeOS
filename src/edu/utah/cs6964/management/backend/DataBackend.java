@@ -23,4 +23,5 @@ public interface DataBackend {
     public Group getGroup(int id);
     public ArrayList<Integer> getUsersForGroup(int id);
     public Map<Byte, String> getAccessLevels();
+    public User loginUser(String username, String password);
 }
