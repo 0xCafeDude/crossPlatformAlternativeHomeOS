@@ -6,9 +6,6 @@
 package edu.utah.cs6964.management.interfaces;
 
 import edu.utah.cs6964.management.Core;
-import edu.utah.cs6964.management.access.User;
-import edu.utah.cs6964.management.backend.DataBackend;
-import edu.utah.cs6964.management.backend.MySQLBackend;
 import edu.utah.cs6964.management.interfaces.cli.*;
 import java.io.Console;
 import java.io.FileInputStream;
@@ -80,27 +77,7 @@ public class CLI {
             }
         }
         
-        DataBackend backend = null;
-        
-        // Figure out the backend
-        String backendValue =  properties.getProperty("backend", "");
-        if(backendValue.equalsIgnoreCase("mysql"))
-        {
-            String dbName = properties.getProperty("dbName", "");
-            String dbHost = properties.getProperty("dbHost", "");
-            String dbUser = properties.getProperty("dbUser", "");
-            String dbPass = properties.getProperty("dbPass", "");
-            
-            if(debug)
-            {
-                System.out.println("Using MySQL Backend with the following values:");
-                System.out.println("\tdbName: " + dbName);
-                System.out.println("\tdbHost: " + dbHost);
-                System.out.println("\tdbUser: " + dbUser);
-                System.out.println("\tdbPass: " + dbPass);
-            }
-        }
-        
+        // Set up the core with the configuration
         Core c = Core.getInstance();
         if(!c.loadConfiguration(properties))
         {
