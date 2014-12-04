@@ -9,6 +9,7 @@ import edu.utah.cs6964.management.Core;
 import edu.utah.cs6964.management.access.User;
 import edu.utah.cs6964.management.backend.DataBackend;
 import edu.utah.cs6964.management.backend.MySQLBackend;
+import edu.utah.cs6964.management.interfaces.cli.*;
 import java.io.Console;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -131,6 +132,9 @@ public class CLI {
         System.out.println("Welcome, " + c.getLoggedInUser().getFirstName() +
                            " " + c.getLoggedInUser().getLastName());
         System.out.println("Type 'quit' to exit or 'list' to list commands");
+        
+        Command[] commands = {new ViewUsersCommand(),
+                              new ViewGroupsCommand()};
         String command = "";
         Scanner scan = new Scanner(System.in);
         while(true)
@@ -146,7 +150,25 @@ public class CLI {
             {
                 System.out.println("Commands:");
                 System.out.println("\tlist: List commands");
+                for(int i = 0; i < commands.length; ++i)
+                {
+                    if(commands[i].getMinimumAccessLevel() <= c.getLoggedInUser().getAccessLevel())
+                    {
+                        System.out.println("\t" + commands[i].getCommand() + ": " + commands[i].getDescription());
+                    }
+                }
                 System.out.println("\tquit: Quit the application");
+            }
+            else
+            {
+                for(int i = 0; i < commands.length; ++i)
+                {
+                    if(command.equalsIgnoreCase(commands[i].getCommand()) &&
+                       commands[i].getMinimumAccessLevel() <= c.getLoggedInUser().getAccessLevel())
+                    {
+                        commands[i].doAction();
+                    }
+                }
             }
         }
     }

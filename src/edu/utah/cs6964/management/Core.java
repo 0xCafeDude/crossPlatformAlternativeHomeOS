@@ -48,6 +48,11 @@ public class Core {
         this.backend = backend;
     }
     
+    public DataBackend getBackend()
+    {
+        return this.backend;
+    }
+    
     public User getLoggedInUser()
     {
         return this.loggedInUser;
