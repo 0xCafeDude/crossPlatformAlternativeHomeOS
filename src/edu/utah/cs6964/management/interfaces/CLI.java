@@ -134,7 +134,9 @@ public class CLI {
         System.out.println("Type 'quit' to exit or 'list' to list commands");
         
         Command[] commands = {new ViewUsersCommand(),
-                              new ViewGroupsCommand()};
+                              new ViewGroupsCommand(),
+                              new ViewAccessLevelsCommand(),
+                              new ViewGroupUsersCommand()};
         String command = "";
         Scanner scan = new Scanner(System.in);
         while(true)
