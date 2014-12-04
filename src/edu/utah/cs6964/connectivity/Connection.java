@@ -6,11 +6,12 @@
 package edu.utah.cs6964.connectivity;
 
 import edu.utah.cs6964.devices.Device;
+import edu.utah.cs6964.exceptions.ModuleNotStartedException;
 
 /**
  *
  * @author christopher
  */
 public interface Connection {
-    public boolean sendData(Device d, byte[] bytes);
+    public boolean sendData(Device d, byte[] bytes) throws ModuleNotStartedException;
 }

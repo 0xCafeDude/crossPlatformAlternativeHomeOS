@@ -5,12 +5,14 @@
  */
 package edu.utah.cs6964.devices.roles.lights;
 
+import edu.utah.cs6964.exceptions.ModuleNotStartedException;
+
 /**
  *
  * @author christopher
  */
-public interface LightBulb extends edu.utah.cs6964.devices.Device {
-    public void turnOn();
-    public void turnOff();
+public interface LightBulb {
+    public void turnOn() throws ModuleNotStartedException;
+    public void turnOff() throws ModuleNotStartedException;
     
 }

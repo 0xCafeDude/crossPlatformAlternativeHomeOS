@@ -5,13 +5,15 @@
  */
 package edu.utah.cs6964.devices.roles.lights;
 
+import edu.utah.cs6964.exceptions.ModuleNotStartedException;
+
 /**
  *
  * @author christopher
  */
 public interface DimmingLightBulb extends LightBulb {
-    public int getLevel();
-    public void setLevel(int level);
-    public int getMinLevel();
-    public int getMaxLevel();
+    public int getLevel() throws ModuleNotStartedException;
+    public void setLevel(int level) throws ModuleNotStartedException;
+    public int getMinLevel() throws ModuleNotStartedException;
+    public int getMaxLevel() throws ModuleNotStartedException;
 }
