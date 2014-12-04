@@ -7,6 +7,8 @@ package edu.utah.cs6964.management;
 
 import edu.utah.cs6964.management.access.User;
 import edu.utah.cs6964.management.backend.DataBackend;
+import edu.utah.cs6964.management.backend.MySQLBackend;
+import java.util.Properties;
 
 /**
  *
@@ -33,6 +35,23 @@ public class Core {
         return instance;
     }
     
+    public boolean loadConfiguration(Properties configuration)
+    {
+        String dbName = configuration.getProperty("dbName", "");
+        String dbHost = configuration.getProperty("dbHost", "");
+        String dbUser = configuration.getProperty("dbUser", "");
+        String dbPass = configuration.getProperty("dbPass", "");
+            
+        backend = new MySQLBackend(dbName, dbHost, dbUser, dbPass);
+        
+        if(null == backend)
+        {
+            return false;
+        }
+        
+        return true;
+    }
+    
     public boolean loginUser(String username, String password)
     {
         if(null == backend)
@@ -43,10 +62,6 @@ public class Core {
         return !(null == loggedInUser);
     }
     
-    public void setBackend(DataBackend backend)
-    {
-        this.backend = backend;
-    }
     
     public DataBackend getBackend()
     {

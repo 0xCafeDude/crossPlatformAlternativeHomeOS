@@ -99,17 +99,13 @@ public class CLI {
                 System.out.println("\tdbUser: " + dbUser);
                 System.out.println("\tdbPass: " + dbPass);
             }
-            
-            backend = new MySQLBackend(dbName, dbHost, dbUser, dbPass);
-        }
-        
-        if(null == backend)
-        {
-            throw new Error("No valid backend found");
         }
         
         Core c = Core.getInstance();
-        c.setBackend(backend);
+        if(!c.loadConfiguration(properties))
+        {
+            throw new Error("No valid configuration loaded");
+        }
         
         Console in = System.console();
         
