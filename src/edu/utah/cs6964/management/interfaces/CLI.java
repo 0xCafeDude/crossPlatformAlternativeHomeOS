@@ -128,6 +128,26 @@ public class CLI {
             firstTime = false;
         } while(!c.loginUser(username, password));
         
-        System.out.println("Welcome " + c.getLoggedInUser().getFirstName() + " " + c.getLoggedInUser().getLastName());
+        System.out.println("Welcome, " + c.getLoggedInUser().getFirstName() +
+                           " " + c.getLoggedInUser().getLastName());
+        System.out.println("Type 'quit' to exit or 'list' to list commands");
+        String command = "";
+        Scanner scan = new Scanner(System.in);
+        while(true)
+        {
+            System.out.print("Command? ");
+            command = scan.nextLine();
+            if(command.equalsIgnoreCase("quit"))
+            {
+                // Just leave
+                break;
+            }
+            else if(command.equalsIgnoreCase("list"))
+            {
+                System.out.println("Commands:");
+                System.out.println("\tlist: List commands");
+                System.out.println("\tquit: Quit the application");
+            }
+        }
     }
 }
