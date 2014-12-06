@@ -20,10 +20,10 @@ import org.zwave4j.ValueId;
 import org.zwave4j.ValueType;
 import org.zwave4j.ZWave4j;
 
-import edu.utah.cs6964.api.Module;
 import edu.utah.cs6964.devices.DeviceManager;
 import edu.utah.cs6964.drivers.Node;
 import edu.utah.cs6964.exceptions.ModuleNotStartedException;
+import edu.utah.cs6964.modules.Module;
 import edu.utah.cs6964.roles.Role;
 import edu.utah.cs6964.roles.devices.Device;
 import edu.utah.cs6964.roles.drivers.ZWaveDriver;

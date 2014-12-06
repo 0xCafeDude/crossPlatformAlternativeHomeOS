@@ -32,6 +32,7 @@ public class DeviceManager {
 		dev.setActiveState(false);
 		dev.setManufacturer("Zipato");
 		dev.setName("RGBW Light Bulb");
+		dev.setUserName("Zipato Bulb at the drawing room");
 		dev.setNetworkId("3");
 		allDevices.add(dev);
 		serviceManager.addModule(dev);
