@@ -193,8 +193,7 @@ public class ZWave implements Module, ZWaveDriver {
 		return offeredRoles;
 	}
 
-	@Override
-	public boolean getRequiredRolesFromServiceManager() {
+	private boolean getRequiredRolesFromServiceManager() {
 		return true;
 	}
 

@@ -9,5 +9,4 @@ public interface Module {
 	public void serviceDeRegistered(List<String> roles);
 	public String getModuleId();
 	public List<String> getOfferedRoles();
-	public boolean getRequiredRolesFromServiceManager();
 }

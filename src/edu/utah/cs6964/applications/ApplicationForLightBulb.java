@@ -5,6 +5,7 @@ import java.util.List;
 
 import edu.utah.cs6964.devices.zwave.RGBBulb;
 import edu.utah.cs6964.exceptions.ModuleNotStartedException;
+import edu.utah.cs6964.management.ServiceManager;
 import edu.utah.cs6964.modules.Module;
 import edu.utah.cs6964.roles.applications.Application;
 import edu.utah.cs6964.roles.devices.Device;
@@ -44,17 +45,18 @@ public class ApplicationForLightBulb implements Module, Application {
 
 	@Override
 	public void start() {
-		RGBBulb bulb = (RGBBulb)this.rgbBulb;
-		try {
-			bulb.turnOn();
-			Thread.sleep(2000);
-			bulb.turnOff();
-		} catch (ModuleNotStartedException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		if (getRequiredRolesFromServiceManager()) {
+			RGBBulb bulb = (RGBBulb)this.rgbBulb;
+			try {
+				bulb.turnOn();
+				Thread.sleep(2000);
+				bulb.turnOff();
+			} catch (ModuleNotStartedException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
-		
 	}
 
 	@Override
@@ -82,9 +84,12 @@ public class ApplicationForLightBulb implements Module, Application {
 		return offeredRoles;
 	}
 
-	@Override
-	public List<String> getRequiredRolesFromServiceManager() {
-		return requiredRoles;
+	private boolean getRequiredRolesFromServiceManager() {
+		this.rgbBulb = (Device)ServiceManager.getInstance().getRole(this, requiredRoles.get(0));
+		if (this.rgbBulb == null) {
+			return false;
+		}
+		return true;
 	}
 
 }

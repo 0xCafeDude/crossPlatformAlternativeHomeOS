@@ -10,6 +10,7 @@ import java.util.List;
 
 import edu.utah.cs6964.drivers.zwave.ZWave;
 import edu.utah.cs6964.exceptions.ModuleNotStartedException;
+import edu.utah.cs6964.management.ServiceManager;
 import edu.utah.cs6964.modules.Module;
 
 /**
@@ -165,7 +166,9 @@ public class RGBBulb implements edu.utah.cs6964.roles.devices.lights.DimmingLigh
 
 	@Override
 	public void start() {
-		started = true;
+		if (getRequiredRolesFromServiceManager()) {
+			started = true;
+		}
 	}
 
 	@Override
@@ -191,9 +194,12 @@ public class RGBBulb implements edu.utah.cs6964.roles.devices.lights.DimmingLigh
 		return offferedRoles;
 	}
 
-	@Override
-	public boolean getRequiredRolesFromServiceManager() {
-		return requiredRoles;
+	private boolean getRequiredRolesFromServiceManager() {
+		this.conn = (ZWave)((Module)ServiceManager.getInstance().getRole(this, requiredRoles.get(0)));
+		if (this.conn == null) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
