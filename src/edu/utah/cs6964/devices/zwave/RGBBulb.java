@@ -5,12 +5,14 @@
  */
 package edu.utah.cs6964.devices.zwave;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import edu.utah.cs6964.api.Module;
 import edu.utah.cs6964.drivers.zwave.ZWave;
 import edu.utah.cs6964.exceptions.ModuleNotStartedException;
-import edu.utah.cs6964.roles.drivers.Driver;
+import edu.utah.cs6964.roles.Role;
 
 /**
  *
@@ -20,11 +22,13 @@ public class RGBBulb implements edu.utah.cs6964.roles.devices.lights.DimmingLigh
 
     public RGBBulb(String id) {
         this.id = id;
-        this.roles.add("DimmingLightBulb");
+        this.offferedRoles.add("DimmingLightBulb");
+        requiredRoles.add("ZWaveDriver");
     }
     
     private String id,name, manufacturer;
-    private List<String> roles;
+    private List<String> offferedRoles = new ArrayList<String>();
+    private List<String> requiredRoles = new ArrayList<String>();
     private String networkId;
     private boolean active;
     private ZWave conn;
@@ -100,11 +104,6 @@ public class RGBBulb implements edu.utah.cs6964.roles.devices.lights.DimmingLigh
     }
     
     @Override
-    public List<String> getRoles() {
-    	return roles;
-    }
-    
-    @Override
     public String getNetworkId() {
     	return networkId;
     }
@@ -157,11 +156,6 @@ public class RGBBulb implements edu.utah.cs6964.roles.devices.lights.DimmingLigh
 	}
 
 	@Override
-	public String getDeviceProtocol() {
-		return conn.getProtocolRole();
-	}
-
-	@Override
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -169,11 +163,6 @@ public class RGBBulb implements edu.utah.cs6964.roles.devices.lights.DimmingLigh
 	@Override
 	public void setManufacturer(String manufacturer)  {
 		this.manufacturer = manufacturer;
-	}
-
-	@Override
-	public void setConnection(Driver conn) {
-		this.conn = (ZWave)conn;
 	}
 
 	@Override
@@ -197,5 +186,20 @@ public class RGBBulb implements edu.utah.cs6964.roles.devices.lights.DimmingLigh
 	@Override
 	public String getModuleId() {
 		return getId();
+	}
+
+	@Override
+	public List<String> getOfferedRoles() {
+		return offferedRoles;
+	}
+
+	@Override
+	public List<String> getRequiredRoles() {
+		return requiredRoles;
+	}
+
+	@Override
+	public void setRequiredRoles(Map<String, Role> roleMap) {
+		this.conn = (ZWave)roleMap.get("ZWaveDriver");
 	}
 }

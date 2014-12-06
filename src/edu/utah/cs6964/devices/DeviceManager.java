@@ -5,7 +5,6 @@ import java.util.List;
 
 import edu.utah.cs6964.devices.zwave.RGBBulb;
 import edu.utah.cs6964.drivers.Node;
-import edu.utah.cs6964.drivers.zwave.ZWave;
 import edu.utah.cs6964.management.ServiceManager;
 import edu.utah.cs6964.roles.devices.Device;
 
@@ -34,7 +33,6 @@ public class DeviceManager {
 		dev.setManufacturer("Zipato");
 		dev.setName("RGBW Light Bulb");
 		dev.setNetworkId("3");
-		dev.setConnection(ZWave.getInstance());
 		allDevices.add(dev);
 		serviceManager.addModule(dev);
 	}

@@ -5,7 +5,9 @@
  */
 package edu.utah.cs6964.drivers.zwave;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.zwave4j.Manager;
@@ -22,6 +24,7 @@ import edu.utah.cs6964.api.Module;
 import edu.utah.cs6964.devices.DeviceManager;
 import edu.utah.cs6964.drivers.Node;
 import edu.utah.cs6964.exceptions.ModuleNotStartedException;
+import edu.utah.cs6964.roles.Role;
 import edu.utah.cs6964.roles.devices.Device;
 import edu.utah.cs6964.roles.drivers.ZWaveDriver;
 
@@ -38,13 +41,14 @@ public class ZWave implements Module, ZWaveDriver {
 	private static ZWave zwaveInstance = new ZWave();
 	private boolean startState = false;
 	private String id;
+	private List<String> offeredRoles = new ArrayList<String>();
 	
 	public static ZWave getInstance() {
 		return zwaveInstance;
 	}
 	
 	private ZWave() {
-		
+		offeredRoles.add("ZWaveDriver");
 	}
 
     @Override
@@ -177,11 +181,6 @@ public class ZWave implements Module, ZWaveDriver {
 	}
 
 	@Override
-	public String getProtocolRole() {
-		return "ZWaveDriver";
-	}
-
-	@Override
 	public String getId() {
 		return id;
 	}
@@ -189,5 +188,20 @@ public class ZWave implements Module, ZWaveDriver {
 	@Override
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	@Override
+	public List<String> getOfferedRoles() {
+		return offeredRoles;
+	}
+
+	@Override
+	public List<String> getRequiredRoles() {
+		return null;
+	}
+
+	@Override
+	public void setRequiredRoles(Map<String, Role> roleMap) {
+		
 	}
 }
