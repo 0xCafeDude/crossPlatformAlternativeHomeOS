@@ -5,6 +5,9 @@ import java.util.List;
 
 import edu.utah.cs6964.modules.Module;
 import edu.utah.cs6964.management.access.AccessRule;
+import edu.utah.cs6964.management.access.DayOfWeek;
+import edu.utah.cs6964.management.access.Time;
+import java.util.Calendar;
 import javax.management.relation.Role;
 
 public class ServiceManager {
@@ -27,8 +30,38 @@ public class ServiceManager {
 		return systemModules.remove(module);
 	}
         
-        public Role getRole(Module sender, String roleName)
+        public Module getRole(Module sender, String roleName)
         {
+            Calendar cal = Calendar.getInstance();
+            int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+            int hour = cal.get(Calendar.HOUR_OF_DAY);
+            int minute = cal.get(Calendar.MINUTE);
+            int second = cal.get(Calendar.SECOND);
+            
+            DayOfWeek day;
+            switch(dayOfWeek)
+            {
+                case 0:
+                    day = DayOfWeek.Sunday;
+                    break;
+                case 1:
+                    day = DayOfWeek.Monday;
+                    break;
+                case 2:
+                    day = DayOfWeek.Tuesday;
+                    break;
+                case 3:
+                    day = DayOfWeek.Wednesday;
+                    break;
+                case 4:
+                    day = DayOfWeek.Thursday;
+                    break;
+                case 5:
+                    day = DayOfWeek.Friday;
+                    break;
+                default:
+                    day = DayOfWeek.Saturday;
+            }
             
             for(int i = 0; i < systemModules.size(); ++i)
             {
@@ -40,15 +73,31 @@ public class ServiceManager {
                     {
                         if(rule.getFromModule().equals(sender.getModuleId()) &&
                            rule.getToModule().equals(systemModules.get(i)) &&
-                           Core.getInstance().getLoggedInUser().getGroups().contains(rule.getGroupID()) //&&
-                           )
+                           Core.getInstance().getLoggedInUser().getGroups().contains(rule.getGroupID()) &&
+                           rule.getDays().contains(day) &&
+                           betweenTimes(new Time(hour, minute, second),
+                                        rule.getStart(), rule.getEnd()))
                         {
-                            return (Role) systemModules.get(i);
+                            return systemModules.get(i);
                         }
                     }
                     break;
                 }
             }
             return null;
+        }
+        
+        private boolean betweenTimes(Time current, Time start, Time end)
+        {
+            if(start.getHours() <= current.getHours() &&
+               current.getHours() <= end.getHours() &&
+               start.getMinutes() <= current.getMinutes() &&
+               current.getMinutes() <= end.getMinutes() &&
+               start.getSeconds() <= current.getSeconds() &&
+               current.getSeconds() <= end.getSeconds())
+            {
+                return true;
+            }
+            return false;
         }
 }
