@@ -195,7 +195,7 @@ public class RGBBulb implements edu.utah.cs6964.roles.devices.lights.DimmingLigh
 	}
 
 	private boolean getRequiredRolesFromServiceManager() {
-		this.conn = (ZWave)((Module)ServiceManager.getInstance().getRole(this, requiredRoles.get(0)));
+		this.conn = (ZWave)ServiceManager.getInstance().getRole(this, requiredRoles.get(0));
 		if (this.conn == null) {
 			return false;
 		}

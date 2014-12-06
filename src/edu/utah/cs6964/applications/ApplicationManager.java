@@ -28,4 +28,8 @@ public class ApplicationManager {
 		serviceManger.addModule((Module)appl);
 	}
 	
+	public List<Application> getAllApplications() {
+		return applList;
+	}
+	
 }
