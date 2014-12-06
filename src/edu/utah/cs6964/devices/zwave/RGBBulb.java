@@ -8,17 +8,15 @@ package edu.utah.cs6964.devices.zwave;
 import java.util.List;
 
 import edu.utah.cs6964.api.Module;
-import edu.utah.cs6964.connectivity.Connection;
-import edu.utah.cs6964.connectivity.Protocols;
-import edu.utah.cs6964.connectivity.protocols.ZWave;
-import edu.utah.cs6964.devices.Device;
+import edu.utah.cs6964.drivers.zwave.ZWave;
 import edu.utah.cs6964.exceptions.ModuleNotStartedException;
+import edu.utah.cs6964.roles.drivers.Driver;
 
 /**
  *
  * @author christopher
  */
-public class RGBBulb implements edu.utah.cs6964.devices.roles.lights.DimmingLightBulb, Device, Module {
+public class RGBBulb implements edu.utah.cs6964.roles.devices.lights.DimmingLightBulb, Module {
 
     public RGBBulb(String id) {
         this.id = id;
@@ -56,7 +54,7 @@ public class RGBBulb implements edu.utah.cs6964.devices.roles.lights.DimmingLigh
     @Override
     public void turnOn() throws ModuleNotStartedException {
     	if (!started) {
-    		throw new ModuleNotStartedException(getModuleName());
+    		throw new ModuleNotStartedException(getModuleId());
     	}
     	conn.setLevel(this, (short)20);
     }
@@ -64,7 +62,7 @@ public class RGBBulb implements edu.utah.cs6964.devices.roles.lights.DimmingLigh
     @Override
     public void turnOff() throws ModuleNotStartedException {
     	if (!started) {
-    		throw new ModuleNotStartedException(getModuleName());
+    		throw new ModuleNotStartedException(getModuleId());
     	}
     	conn.setLevel(this, (short)0);
     }
@@ -72,7 +70,7 @@ public class RGBBulb implements edu.utah.cs6964.devices.roles.lights.DimmingLigh
     @Override
     public int getLevel() throws ModuleNotStartedException {
     	if (!started) {
-    		throw new ModuleNotStartedException(getModuleName());
+    		throw new ModuleNotStartedException(getModuleId());
     	}
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -80,7 +78,7 @@ public class RGBBulb implements edu.utah.cs6964.devices.roles.lights.DimmingLigh
     @Override
     public void setLevel(int level) throws ModuleNotStartedException {
     	if (!started) {
-    		throw new ModuleNotStartedException(getModuleName());
+    		throw new ModuleNotStartedException(getModuleId());
     	}
     	conn.setLevel(this, (short)level);
     }
@@ -88,7 +86,7 @@ public class RGBBulb implements edu.utah.cs6964.devices.roles.lights.DimmingLigh
     @Override
     public int getMinLevel() throws ModuleNotStartedException {
     	if (!started) {
-    		throw new ModuleNotStartedException(getModuleName());
+    		throw new ModuleNotStartedException(getModuleId());
     	}
         return conn.getMinLevel(this);
     }
@@ -96,7 +94,7 @@ public class RGBBulb implements edu.utah.cs6964.devices.roles.lights.DimmingLigh
     @Override
     public int getMaxLevel() throws ModuleNotStartedException {
     	if (!started) {
-    		throw new ModuleNotStartedException(getModuleName());
+    		throw new ModuleNotStartedException(getModuleId());
     	}
         return conn.getMaxLevel(this);
     }
@@ -159,8 +157,8 @@ public class RGBBulb implements edu.utah.cs6964.devices.roles.lights.DimmingLigh
 	}
 
 	@Override
-	public Protocols getDeviceProtocol() {
-		return Protocols.ZWAVE;
+	public String getDeviceProtocol() {
+		return conn.getProtocolRole();
 	}
 
 	@Override
@@ -174,7 +172,7 @@ public class RGBBulb implements edu.utah.cs6964.devices.roles.lights.DimmingLigh
 	}
 
 	@Override
-	public void setConnection(Connection conn) {
+	public void setConnection(Driver conn) {
 		this.conn = (ZWave)conn;
 	}
 
@@ -197,7 +195,7 @@ public class RGBBulb implements edu.utah.cs6964.devices.roles.lights.DimmingLigh
 	}
 
 	@Override
-	public String getModuleName() {
-		return "Zipato Light Bulb";
+	public String getModuleId() {
+		return getId();
 	}
 }

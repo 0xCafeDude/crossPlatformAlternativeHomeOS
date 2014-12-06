@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.utah.cs6964.connectivity.protocols;
+package edu.utah.cs6964.drivers.zwave;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
@@ -19,29 +19,27 @@ import org.zwave4j.ValueType;
 import org.zwave4j.ZWave4j;
 
 import edu.utah.cs6964.api.Module;
-import edu.utah.cs6964.devices.Device;
-import edu.utah.cs6964.devices.DeviceFactory;
-import edu.utah.cs6964.devices.zwave.DeviceFactoryZWave;
+import edu.utah.cs6964.devices.DeviceManager;
+import edu.utah.cs6964.drivers.Node;
 import edu.utah.cs6964.exceptions.ModuleNotStartedException;
+import edu.utah.cs6964.roles.devices.Device;
+import edu.utah.cs6964.roles.drivers.ZWaveDriver;
 
 /**
  *
  * @author christopher
  */
-public class ZWave implements edu.utah.cs6964.connectivity.Connection, Module {
+public class ZWave implements Module, ZWaveDriver {
 	
 	private long homeId;
 	private boolean READY= false, POLLING_ENABLED = false;
 	private Manager manager;
-	private DeviceFactory zwaveDeviceFactory = new DeviceFactoryZWave();
-	private static ZWave zwaveInstance = null;
-	private final String MODULE_NAME = "ZWave";
+	private DeviceManager deviceManager = DeviceManager.getInstance();
+	private static ZWave zwaveInstance = new ZWave();
 	private boolean startState = false;
+	private String id;
 	
 	public static ZWave getInstance() {
-		if (zwaveInstance == null) {
-			zwaveInstance = new ZWave();
-		}
 		return zwaveInstance;
 	}
 	
@@ -52,21 +50,21 @@ public class ZWave implements edu.utah.cs6964.connectivity.Connection, Module {
     @Override
     public boolean sendData(Device d, byte[] bytes) throws ModuleNotStartedException {
     	if (!startState) {
-    		throw new ModuleNotStartedException(getModuleName());
+    		throw new ModuleNotStartedException(getModuleId());
     	}
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public boolean setLevel(Device d, short level) throws ModuleNotStartedException {
     	if (!startState) {
-    		throw new ModuleNotStartedException(getModuleName());
+    		throw new ModuleNotStartedException(getModuleId());
     	}
     	return manager.setValueAsByte(new ValueId(homeId, Short.parseShort(d.getId()), ValueGenre.USER, (short)38, (short)1,(short)0, ValueType.BYTE), level);
     }
     
     public short getLevel(Device d) throws ModuleNotStartedException {
     	if (!startState) {
-    		throw new ModuleNotStartedException(getModuleName());
+    		throw new ModuleNotStartedException(getModuleId());
     	}
     	AtomicReference<Short> level = new AtomicReference<Short>();
     	manager.getValueAsByte(new ValueId(homeId, Short.parseShort(d.getId()), ValueGenre.USER, (short)38, (short)1,(short)0, ValueType.BYTE), level);
@@ -75,14 +73,14 @@ public class ZWave implements edu.utah.cs6964.connectivity.Connection, Module {
     
     public int getMaxLevel(Device d) throws ModuleNotStartedException {
     	if (!startState) {
-    		throw new ModuleNotStartedException(getModuleName());
+    		throw new ModuleNotStartedException(getModuleId());
     	}
     	return manager.getValueMax(new ValueId(homeId, Short.parseShort(d.getId()), ValueGenre.USER, (short)38, (short)1,(short)0, ValueType.BYTE));
     }
     
     public int getMinLevel(Device d) throws ModuleNotStartedException {
     	if (!startState) {
-    		throw new ModuleNotStartedException(getModuleName());
+    		throw new ModuleNotStartedException(getModuleId());
     	}
     	return manager.getValueMin(new ValueId(homeId, Short.parseShort(d.getId()), ValueGenre.USER, (short)38, (short)1,(short)0, ValueType.BYTE));
     }
@@ -129,11 +127,7 @@ public class ZWave implements edu.utah.cs6964.connectivity.Connection, Module {
 	                        break;
 	                    case NODE_NEW:
 	                        nodeId = notification.getNodeId();
-	                        addNode(nodeId);
-	                        break;
-	                    case NODE_ADDED:
-	                    	nodeId = notification.getNodeId();
-	                        addNode(nodeId);
+	                        createNode(nodeId);
 	                        break;
 	                    case NODE_REMOVED:
 	                        System.out.println(String.format("Node removed\n" +
@@ -144,11 +138,11 @@ public class ZWave implements edu.utah.cs6964.connectivity.Connection, Module {
 	                }
 	            }
 	            
-	            private void addNode(Short nodeId) {
+	            private void createNode(Short nodeId) {
 	            	String manufacturerName, nodeName;
 	            	manufacturerName = manager.getNodeManufacturerName(homeId, nodeId);
 	                nodeName = manager.getNodeProductName(homeId, nodeId);
-	                zwaveDeviceFactory.addDevice(new ZWaveNode(Short.toString(nodeId), nodeName, manufacturerName));
+	                deviceManager.createDevice(new Node(Short.toString(nodeId), nodeName, manufacturerName));
 	            }
 	        };
 	        manager.addWatcher(watcher, null);
@@ -178,7 +172,22 @@ public class ZWave implements edu.utah.cs6964.connectivity.Connection, Module {
 	}
 
 	@Override
-	public String getModuleName() {
-		return MODULE_NAME;
+	public String getModuleId() {
+		return getId();
+	}
+
+	@Override
+	public String getProtocolRole() {
+		return "ZWaveDriver";
+	}
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(String id) {
+		this.id = id;
 	}
 }

@@ -7,5 +7,5 @@ public interface Module {
 	public void stop();
 	public void serviceRegistered(List<String> roles);
 	public void serviceDeRegistered(List<String> roles);
-	public String getModuleName();
+	public String getModuleId();
 }
