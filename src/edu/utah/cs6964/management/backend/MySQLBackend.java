@@ -5,7 +5,10 @@
  */
 package edu.utah.cs6964.management.backend;
 
+import edu.utah.cs6964.management.access.AccessRule;
+import edu.utah.cs6964.management.access.DayOfWeek;
 import edu.utah.cs6964.management.access.Group;
+import edu.utah.cs6964.management.access.Time;
 import edu.utah.cs6964.management.access.User;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -212,6 +215,64 @@ public class MySQLBackend implements DataBackend {
         return null;
     }
     
+    @Override
+    public ArrayList<AccessRule> getAccessRules() {
+        ArrayList<AccessRule> returnValue = new ArrayList<AccessRule>();
+        try {
+            Statement query = con.createStatement();
+            ResultSet results = query.executeQuery("Select * from `AccessRules`");
+            while(results.next())
+            {
+                ArrayList<DayOfWeek> days = new ArrayList<DayOfWeek>();
+                byte binaryDays = results.getByte("Days");
+                if((0x1 & binaryDays) > 0)
+                {
+                    days.add(DayOfWeek.Sunday);
+                }
+                if((0x2 & binaryDays) > 0)
+                {
+                    days.add(DayOfWeek.Monday);
+                }
+                if((0x4 & binaryDays) > 0)
+                {
+                    days.add(DayOfWeek.Tuesday);
+                }
+                if((0x8 & binaryDays) > 0)
+                {
+                    days.add(DayOfWeek.Wednesday);
+                }
+                if((0x10 & binaryDays) > 0)
+                {
+                    days.add(DayOfWeek.Thursday);
+                }
+                if((0x20 & binaryDays) > 0)
+                {
+                    days.add(DayOfWeek.Friday);
+                }
+                if((0x40 & binaryDays) > 0)
+                {
+                    days.add(DayOfWeek.Saturday);
+                }
+                String[] tempParts = results.getString("StartTime").split(".");
+                String[] parts = tempParts[0].split(":");
+                Time start = new Time(getHour(parts[0]), getMinute(parts[1]), getSecond(parts[2]));
+                tempParts = results.getString("EndTime").split(".");
+                parts = tempParts[0].split(":");
+                Time end = new Time(getHour(parts[0]), getMinute(parts[1]), getSecond(parts[2]));
+                returnValue.add(new AccessRule(results.getInt("RuleID"),
+                                results.getString("FromModuleID"),
+                                results.getString("ToModuleID"),
+                                results.getInt("GroupID"),
+                                days, start, end));
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(MySQLBackend.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return returnValue;
+    }
+    
     private String SHA1(String input) throws NoSuchAlgorithmException
     {
         MessageDigest sha1 = MessageDigest.getInstance("SHA1");
@@ -224,4 +285,18 @@ public class MySQLBackend implements DataBackend {
         return sb.toString();
     }
     
+    private int getHour(String input)
+    {
+        return Math.max(0, Math.min(Integer.parseInt(input), 23));
+    }
+    
+    private int getMinute(String input)
+    {
+        return Math.max(0, Math.min(Integer.parseInt(input), 59));
+    }
+    
+    private int getSecond(String input)
+    {
+        return Math.max(0, Math.min(Integer.parseInt(input), 59));
+    }
 }

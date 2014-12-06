@@ -5,6 +5,7 @@
  */
 package edu.utah.cs6964.management.backend;
 
+import edu.utah.cs6964.management.access.AccessRule;
 import edu.utah.cs6964.management.access.Group;
 import edu.utah.cs6964.management.access.User;
 import java.util.ArrayList;
@@ -24,4 +25,5 @@ public interface DataBackend {
     public ArrayList<Integer> getUsersForGroup(int id);
     public Map<Byte, String> getAccessLevels();
     public User loginUser(String username, String password);
+    public ArrayList<AccessRule> getAccessRules();
 }
