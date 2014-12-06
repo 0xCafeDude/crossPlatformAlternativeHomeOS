@@ -5,9 +5,13 @@
  */
 package edu.utah.cs6964.management;
 
+import edu.utah.cs6964.applications.ApplicationManager;
+import edu.utah.cs6964.devices.DeviceManager;
+import edu.utah.cs6964.drivers.DriverManager;
 import edu.utah.cs6964.management.access.User;
 import edu.utah.cs6964.management.backend.DataBackend;
 import edu.utah.cs6964.management.backend.MySQLBackend;
+
 import java.util.Properties;
 
 /**
@@ -48,6 +52,13 @@ public class Core {
         {
             return false;
         }
+        
+        DriverManager driverManager = DriverManager.getInstance();
+        driverManager.loadAllDrivers();
+        DeviceManager deviceManager = DeviceManager.getInstance();
+        deviceManager.loadAllDevices();
+        ApplicationManager applManager = ApplicationManager.getInstance();
+        applManager.loadAllApplications();
         
         return true;
     }

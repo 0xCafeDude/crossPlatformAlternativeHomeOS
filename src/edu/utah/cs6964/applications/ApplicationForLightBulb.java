@@ -2,12 +2,10 @@ package edu.utah.cs6964.applications;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import edu.utah.cs6964.devices.zwave.RGBBulb;
 import edu.utah.cs6964.exceptions.ModuleNotStartedException;
 import edu.utah.cs6964.modules.Module;
-import edu.utah.cs6964.roles.Role;
 import edu.utah.cs6964.roles.applications.Application;
 import edu.utah.cs6964.roles.devices.Device;
 
@@ -85,13 +83,8 @@ public class ApplicationForLightBulb implements Module, Application {
 	}
 
 	@Override
-	public List<String> getRequiredRoles() {
+	public List<String> getRequiredRolesFromServiceManager() {
 		return requiredRoles;
-	}
-
-	@Override
-	public void setRequiredRoles(Map<String, Role> roleMap) {
-		rgbBulb = (Device)roleMap.get("DimmingLightBulb");
 	}
 
 }

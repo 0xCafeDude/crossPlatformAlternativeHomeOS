@@ -7,12 +7,10 @@ package edu.utah.cs6964.devices.zwave;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import edu.utah.cs6964.drivers.zwave.ZWave;
 import edu.utah.cs6964.exceptions.ModuleNotStartedException;
 import edu.utah.cs6964.modules.Module;
-import edu.utah.cs6964.roles.Role;
 
 /**
  *
@@ -194,13 +192,8 @@ public class RGBBulb implements edu.utah.cs6964.roles.devices.lights.DimmingLigh
 	}
 
 	@Override
-	public List<String> getRequiredRoles() {
+	public boolean getRequiredRolesFromServiceManager() {
 		return requiredRoles;
-	}
-
-	@Override
-	public void setRequiredRoles(Map<String, Role> roleMap) {
-		this.conn = (ZWave)roleMap.get("ZWaveDriver");
 	}
 
 	@Override

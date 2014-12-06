@@ -10,6 +10,15 @@ import edu.utah.cs6964.roles.drivers.Driver;
 public class DriverManager {
 	private ServiceManager serviceManger = ServiceManager.getInstance();
 	private List<Driver> driverList = new ArrayList<Driver>();
+	private static DriverManager driverManagerInstance = new DriverManager();
+	
+	private DriverManager() {
+		
+	}
+	
+	public static DriverManager getInstance() {
+		return driverManagerInstance;
+	}
 	
 	public void loadAllDrivers() {
 		ZWave zwave = ZWave.getInstance();

@@ -26,7 +26,7 @@ public class DeviceManager {
 		return deviceManagerInstance;
 	}
 	
-	public void loadDevices() {
+	public void loadAllDevices() {
 		// to read sql tables and stuff for now Hardcoding
 		RGBBulb dev = new RGBBulb("2");
 		dev.setActiveState(false);

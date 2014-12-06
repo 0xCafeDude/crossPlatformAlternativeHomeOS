@@ -7,7 +7,6 @@ package edu.utah.cs6964.drivers.zwave;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.zwave4j.Manager;
@@ -24,7 +23,6 @@ import edu.utah.cs6964.devices.DeviceManager;
 import edu.utah.cs6964.drivers.Node;
 import edu.utah.cs6964.exceptions.ModuleNotStartedException;
 import edu.utah.cs6964.modules.Module;
-import edu.utah.cs6964.roles.Role;
 import edu.utah.cs6964.roles.devices.Device;
 import edu.utah.cs6964.roles.drivers.ZWaveDriver;
 
@@ -196,12 +194,8 @@ public class ZWave implements Module, ZWaveDriver {
 	}
 
 	@Override
-	public List<String> getRequiredRoles() {
-		return null;
+	public boolean getRequiredRolesFromServiceManager() {
+		return true;
 	}
 
-	@Override
-	public void setRequiredRoles(Map<String, Role> roleMap) {
-		
-	}
 }
