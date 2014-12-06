@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import edu.utah.cs6964.api.Module;
 import edu.utah.cs6964.drivers.zwave.ZWave;
 import edu.utah.cs6964.exceptions.ModuleNotStartedException;
+import edu.utah.cs6964.modules.Module;
 import edu.utah.cs6964.roles.Role;
 
 /**
@@ -29,7 +29,7 @@ public class RGBBulb implements edu.utah.cs6964.roles.devices.lights.DimmingLigh
     private String id,name, manufacturer;
     private List<String> offferedRoles = new ArrayList<String>();
     private List<String> requiredRoles = new ArrayList<String>();
-    private String networkId;
+    private String networkId, userName;
     private boolean active;
     private ZWave conn;
     private boolean started = false;
@@ -201,5 +201,15 @@ public class RGBBulb implements edu.utah.cs6964.roles.devices.lights.DimmingLigh
 	@Override
 	public void setRequiredRoles(Map<String, Role> roleMap) {
 		this.conn = (ZWave)roleMap.get("ZWaveDriver");
+	}
+
+	@Override
+	public String getUserName() {
+		return userName;
+	}
+
+	@Override
+	public void setUserName(String name) {
+		this.userName = name;
 	}
 }

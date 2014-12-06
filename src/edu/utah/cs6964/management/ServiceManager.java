@@ -3,7 +3,7 @@ package edu.utah.cs6964.management;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.utah.cs6964.api.Module;
+import edu.utah.cs6964.modules.Module;
 import edu.utah.cs6964.management.access.AccessRule;
 import javax.management.relation.Role;
 
