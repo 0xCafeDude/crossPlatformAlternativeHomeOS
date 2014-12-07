@@ -109,7 +109,9 @@ public class CLI {
         Command[] commands = {new ViewUsersCommand(),
                               new ViewGroupsCommand(),
                               new ViewAccessLevelsCommand(),
-                              new ViewGroupUsersCommand()};
+                              new ViewGroupUsersCommand(),
+                              new ViewApplicationsCommand(),
+                              new RunApplicationCommand()};
         String command = "";
         Scanner scan = new Scanner(System.in);
         while(true)
