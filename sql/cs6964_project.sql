@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 03, 2014 at 10:03 AM
+-- Generation Time: Dec 08, 2014 at 11:11 AM
 -- Server version: 5.5.40-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.5
 
@@ -29,7 +29,7 @@ USE `cs6964_project`;
 --
 
 DROP TABLE IF EXISTS `AccessLevels`;
-CREATE TABLE `AccessLevels` (
+CREATE TABLE IF NOT EXISTS `AccessLevels` (
   `Level` tinyint(4) unsigned NOT NULL,
   `Name` varchar(20) NOT NULL,
   UNIQUE KEY `Level` (`Level`)
@@ -46,11 +46,29 @@ INSERT INTO `AccessLevels` (`Level`, `Name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `AccessRules`
+--
+
+DROP TABLE IF EXISTS `AccessRules`;
+CREATE TABLE IF NOT EXISTS `AccessRules` (
+  `RuleID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `FromModuleID` char(36) NOT NULL,
+  `ToModuleID` char(36) NOT NULL,
+  `GroupID` int(11) NOT NULL,
+  `Days` bit(7) NOT NULL,
+  `StartTime` time NOT NULL,
+  `EndTime` time NOT NULL,
+  PRIMARY KEY (`RuleID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Groups`
 --
 
 DROP TABLE IF EXISTS `Groups`;
-CREATE TABLE `Groups` (
+CREATE TABLE IF NOT EXISTS `Groups` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(20) NOT NULL,
   PRIMARY KEY (`ID`),
@@ -71,7 +89,7 @@ INSERT INTO `Groups` (`ID`, `Name`) VALUES
 --
 
 DROP TABLE IF EXISTS `Users`;
-CREATE TABLE `Users` (
+CREATE TABLE IF NOT EXISTS `Users` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Username` varchar(20) NOT NULL,
   `Password` char(40) NOT NULL,
@@ -98,7 +116,7 @@ INSERT INTO `Users` (`ID`, `Username`, `Password`, `FirstName`, `LastName`, `Acc
 --
 
 DROP TABLE IF EXISTS `XREF_Users_Groups`;
-CREATE TABLE `XREF_Users_Groups` (
+CREATE TABLE IF NOT EXISTS `XREF_Users_Groups` (
   `UserID` int(11) NOT NULL,
   `GroupID` int(11) NOT NULL,
   KEY `UserID` (`UserID`),
