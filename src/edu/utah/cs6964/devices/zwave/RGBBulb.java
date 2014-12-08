@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.utah.cs6964.drivers.zwave.ZWave;
+import edu.utah.cs6964.exceptions.MissingRolesException;
 import edu.utah.cs6964.exceptions.ModuleNotStartedException;
 import edu.utah.cs6964.management.ServiceManager;
 import edu.utah.cs6964.modules.Module;
@@ -165,9 +166,11 @@ public class RGBBulb implements edu.utah.cs6964.roles.devices.lights.DimmingLigh
 	}
 
 	@Override
-	public void start() {
+	public void start() throws MissingRolesException {
 		if (getRequiredRolesFromServiceManager()) {
 			started = true;
+		} else {
+			throw new MissingRolesException("RGB Bulb");
 		}
 	}
 
@@ -194,11 +197,12 @@ public class RGBBulb implements edu.utah.cs6964.roles.devices.lights.DimmingLigh
 		return offferedRoles;
 	}
 
-	private boolean getRequiredRolesFromServiceManager() {
+	private boolean getRequiredRolesFromServiceManager() throws MissingRolesException {
 		this.conn = (ZWave)ServiceManager.getInstance().getRole(this, requiredRoles.get(0));
 		if (this.conn == null) {
 			return false;
 		}
+		((Module)this.conn).start();
 		return true;
 	}
 

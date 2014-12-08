@@ -5,8 +5,6 @@
  */
 package edu.utah.cs6964.management.interfaces;
 
-import edu.utah.cs6964.management.Core;
-import edu.utah.cs6964.management.interfaces.cli.*;
 import java.io.Console;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,6 +14,15 @@ import java.util.Properties;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import edu.utah.cs6964.management.Core;
+import edu.utah.cs6964.management.interfaces.cli.Command;
+import edu.utah.cs6964.management.interfaces.cli.RunApplicationCommand;
+import edu.utah.cs6964.management.interfaces.cli.ViewAccessLevelsCommand;
+import edu.utah.cs6964.management.interfaces.cli.ViewApplicationsCommand;
+import edu.utah.cs6964.management.interfaces.cli.ViewGroupUsersCommand;
+import edu.utah.cs6964.management.interfaces.cli.ViewGroupsCommand;
+import edu.utah.cs6964.management.interfaces.cli.ViewUsersCommand;
 
 /**
  *
@@ -85,6 +92,7 @@ public class CLI {
         }
         
         Console in = System.console();
+        //Scanner in = new Scanner(System.in);
         
         boolean firstTime = true;
         String username, password;
@@ -96,8 +104,10 @@ public class CLI {
             }
             System.out.println("Enter Username:");
             username = in.readLine();
+            //username = in.nextLine();
             System.out.println("Enter Password:");
             password = new String(in.readPassword());
+            //password = new String(in.nextLine());
 
             firstTime = false;
         } while(!c.loginUser(username, password));

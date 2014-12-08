@@ -253,10 +253,10 @@ public class MySQLBackend implements DataBackend {
                 {
                     days.add(DayOfWeek.Saturday);
                 }
-                String[] tempParts = results.getString("StartTime").split(".");
+                String[] tempParts = results.getString("StartTime").split("\\.");
                 String[] parts = tempParts[0].split(":");
                 Time start = new Time(getHour(parts[0]), getMinute(parts[1]), getSecond(parts[2]));
-                tempParts = results.getString("EndTime").split(".");
+                tempParts = results.getString("EndTime").split("\\.");
                 parts = tempParts[0].split(":");
                 Time end = new Time(getHour(parts[0]), getMinute(parts[1]), getSecond(parts[2]));
                 returnValue.add(new AccessRule(results.getInt("RuleID"),

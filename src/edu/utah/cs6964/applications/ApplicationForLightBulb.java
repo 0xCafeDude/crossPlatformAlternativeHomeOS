@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.utah.cs6964.devices.zwave.RGBBulb;
+import edu.utah.cs6964.exceptions.MissingRolesException;
 import edu.utah.cs6964.exceptions.ModuleNotStartedException;
 import edu.utah.cs6964.management.ServiceManager;
 import edu.utah.cs6964.modules.Module;
@@ -44,7 +45,7 @@ public class ApplicationForLightBulb implements Module, Application {
 	}
 
 	@Override
-	public void start() {
+	public void start() throws MissingRolesException {
 		if (getRequiredRolesFromServiceManager()) {
 			RGBBulb bulb = (RGBBulb)this.rgbBulb;
 			try {
@@ -84,11 +85,12 @@ public class ApplicationForLightBulb implements Module, Application {
 		return offeredRoles;
 	}
 
-	private boolean getRequiredRolesFromServiceManager() {
+	private boolean getRequiredRolesFromServiceManager() throws MissingRolesException {
 		this.rgbBulb = (Device)ServiceManager.getInstance().getRole(this, requiredRoles.get(0));
 		if (this.rgbBulb == null) {
 			return false;
 		}
+		((Module)this.rgbBulb).start();
 		return true;
 	}
 

@@ -42,14 +42,14 @@ public class RunApplicationCommand implements Command{
         Scanner input = new Scanner(System.in);
         try {
             int index = input.nextInt();
-            if(index < apps.size())
+            if((index - 1) < apps.size())
             {
-                Module temp = (Module) apps.get(index);
+                Module temp = (Module) apps.get((index -1));
                 temp.start();
             }
         } catch(Exception ex)
         {
-            // Intentionally Blank
+        	ex.printStackTrace();
         }
     }
     

@@ -41,22 +41,22 @@ public class ServiceManager {
             DayOfWeek day;
             switch(dayOfWeek)
             {
-                case 0:
+                case 1:
                     day = DayOfWeek.Sunday;
                     break;
-                case 1:
+                case 2:
                     day = DayOfWeek.Monday;
                     break;
-                case 2:
+                case 3:
                     day = DayOfWeek.Tuesday;
                     break;
-                case 3:
+                case 4:
                     day = DayOfWeek.Wednesday;
                     break;
-                case 4:
+                case 5:
                     day = DayOfWeek.Thursday;
                     break;
-                case 5:
+                case 6:
                     day = DayOfWeek.Friday;
                     break;
                 default:
@@ -72,7 +72,7 @@ public class ServiceManager {
                     for(AccessRule rule : rules)
                     {
                         if(rule.getFromModule().equals(sender.getModuleId()) &&
-                           rule.getToModule().equals(systemModules.get(i)) &&
+                           rule.getToModule().equals(systemModules.get(i).getModuleId()) &&
                            Core.getInstance().getLoggedInUser().getGroups().contains(rule.getGroupID()) &&
                            rule.getDays().contains(day) &&
                            betweenTimes(new Time(hour, minute, second),

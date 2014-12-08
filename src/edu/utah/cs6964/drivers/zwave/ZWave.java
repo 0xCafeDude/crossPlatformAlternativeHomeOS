@@ -33,7 +33,8 @@ import edu.utah.cs6964.roles.drivers.ZWaveDriver;
 public class ZWave implements Module, ZWaveDriver {
 	
 	private long homeId;
-	private boolean READY= false, POLLING_ENABLED = false;
+	private boolean POLLING_ENABLED = false;
+	private static boolean READY= false;
 	private Manager manager;
 	private DeviceManager deviceManager = DeviceManager.getInstance();
 	private static ZWave zwaveInstance = new ZWave();
@@ -61,7 +62,7 @@ public class ZWave implements Module, ZWaveDriver {
     	if (!startState) {
     		throw new ModuleNotStartedException(getModuleId());
     	}
-    	return manager.setValueAsByte(new ValueId(homeId, Short.parseShort(d.getId()), ValueGenre.USER, (short)38, (short)1,(short)0, ValueType.BYTE), level);
+    	return manager.setValueAsByte(new ValueId(homeId, Short.parseShort(d.getNetworkId()), ValueGenre.USER, (short)38, (short)1,(short)0, ValueType.BYTE), level);
     }
     
     public short getLevel(Device d) throws ModuleNotStartedException {
@@ -152,6 +153,11 @@ public class ZWave implements Module, ZWaveDriver {
 	        final String controllerPort = "/dev/ttyUSB0";
 
 	        manager.addDriver(controllerPort);
+	        while (!READY) {
+	        	if (READY) {
+	        		System.out.println("Zwave Driver Ready");
+	        	}
+    		}
 		}
 	}
 
