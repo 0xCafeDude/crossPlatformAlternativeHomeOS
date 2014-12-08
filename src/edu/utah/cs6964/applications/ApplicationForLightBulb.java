@@ -58,7 +58,7 @@ public class ApplicationForLightBulb implements Module, Application {
 				e.printStackTrace();
 			}
 		} else {
-			throw new MissingRolesException("Application for turning on and off RGBW light bulb is missing");
+			throw new MissingRolesException("Application for turning on and off RGBW light bulb");
 		}
 	}
 
