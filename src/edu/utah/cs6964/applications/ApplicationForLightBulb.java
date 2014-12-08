@@ -57,6 +57,8 @@ public class ApplicationForLightBulb implements Module, Application {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+		} else {
+			throw new MissingRolesException("Application for turning on and off RGBW light bulb is missing");
 		}
 	}
 
