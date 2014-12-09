@@ -3,3 +3,5 @@ dbName=
 dbHost=
 dbUser=
 dbPass=
+OpenZWaveConfigPath=
+ZWaveControllerPort=
