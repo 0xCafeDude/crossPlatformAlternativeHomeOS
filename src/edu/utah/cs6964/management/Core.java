@@ -22,11 +22,13 @@ public class Core {
     
     private DataBackend backend;
     private User loggedInUser;
+    private Properties config;
     
     private static Core instance = null;
     private Core()
     {
         this.backend = null;
+        this.config = null;
     }
     
     public static Core getInstance()
@@ -59,8 +61,12 @@ public class Core {
         deviceManager.loadAllDevices();
         ApplicationManager applManager = ApplicationManager.getInstance();
         applManager.loadAllApplications();
-        
+        this.config = configuration;
         return true;
+    }
+    
+    public Properties getConfiguration() {
+    	return this.config;
     }
     
     public boolean loginUser(String username, String password)

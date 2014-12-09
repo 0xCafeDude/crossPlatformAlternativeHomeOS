@@ -22,6 +22,7 @@ import org.zwave4j.ZWave4j;
 import edu.utah.cs6964.devices.DeviceManager;
 import edu.utah.cs6964.drivers.Node;
 import edu.utah.cs6964.exceptions.ModuleNotStartedException;
+import edu.utah.cs6964.management.Core;
 import edu.utah.cs6964.modules.Module;
 import edu.utah.cs6964.roles.devices.Device;
 import edu.utah.cs6964.roles.drivers.ZWaveDriver;
@@ -49,6 +50,7 @@ public class ZWave implements Module, ZWaveDriver {
 	private ZWave() {
 		offeredRoles.add("ZWaveDriver");
 	}
+	
 
     @Override
     public boolean sendData(Device d, byte[] bytes) throws ModuleNotStartedException {
@@ -93,8 +95,8 @@ public class ZWave implements Module, ZWaveDriver {
 		if (!startState) {
 			startState = true;
 			NativeLibraryLoader.loadLibrary(ZWave4j.LIBRARY_NAME, ZWave4j.class);
-
-	        final Options options = Options.create("/home/shivam/open-zwave2/config", "", "");
+			
+	        final Options options = Options.create(Core.getInstance().getConfiguration().getProperty("OpenZWaveConfigPath"), "", "");
 	        options.addOptionBool("ConsoleOutput", false);
 	        options.lock();
 	        
@@ -150,7 +152,7 @@ public class ZWave implements Module, ZWaveDriver {
 	        };
 	        manager.addWatcher(watcher, null);
 	        
-	        final String controllerPort = "/dev/ttyUSB0";
+	        final String controllerPort = Core.getInstance().getConfiguration().getProperty("ZWaveControllerPort");
 
 	        manager.addDriver(controllerPort);
 	        while (!READY) {
