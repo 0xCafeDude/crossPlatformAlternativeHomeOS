@@ -35,7 +35,7 @@ public class ZWave implements Module, ZWaveDriver {
 	
 	private long homeId;
 	private boolean POLLING_ENABLED = false;
-	private static boolean READY= false;
+	private static volatile boolean READY= false;
 	private Manager manager;
 	private DeviceManager deviceManager = DeviceManager.getInstance();
 	private static ZWave zwaveInstance = new ZWave();
@@ -156,9 +156,7 @@ public class ZWave implements Module, ZWaveDriver {
 
 	        manager.addDriver(controllerPort);
 	        while (!READY) {
-	        	if (READY) {
-	        		System.out.println("Zwave Driver Ready");
-	        	}
+	        	
     		}
 		}
 	}

@@ -114,7 +114,6 @@ public class CLI {
         
         System.out.println("Welcome, " + c.getLoggedInUser().getFirstName() +
                            " " + c.getLoggedInUser().getLastName());
-        System.out.println("Type 'quit' to exit or 'list' to list commands");
         
         Command[] commands = {new ViewUsersCommand(),
                               new ViewGroupsCommand(),
@@ -126,6 +125,7 @@ public class CLI {
         Scanner scan = new Scanner(System.in);
         while(true)
         {
+        	System.out.println("Type 'quit' to exit or 'list' to list commands");
             System.out.print("Command? ");
             command = scan.nextLine();
             if(command.equalsIgnoreCase("quit"))
