@@ -1,10 +1,15 @@
 \section{Related Work}
 \label{sec:related}
-\subsection{HomeOS}
-There is much research in this direction by Microsoft. HomeOS was developed by
-Microsoft Research. Since the original system, Microsoft Research has continued
-to use it for other research. Examples of this continued research are
-HomeLab~\cite{homeLab} and Lab of Things~\cite{labOfThings}.
+There is much research in the direction of making home automation easier by
+Microsoft. HomeOS was developed by Microsoft Research. It is designed to provide
+a PC-like abstraction for home automation devices. The system presents devices
+as peripherals and uses applications to allow cross-device tasks. The user
+interface for the system is designed for a home environment and is designed to
+provide an easy to understand access control system. The system itself is
+written in C\# and only runs on the Windows operating system. Since the original
+system, Microsoft Research has continued to use it for other research. Examples
+of this continued research are HomeLab~\cite{homeLab} and Lab of
+Things~\cite{labOfThings}.
 
 HomeLab is a shared infrastructure for conducting field studies for home
 technology. HomeLab consists of a number of homes all containing different home
@@ -18,4 +23,31 @@ allows groups to remotely update, monitor, and collect data from HomeOS.
 Lab of Things consists of HomeOS and a number of cloud services. One of these
 services is the Home Store from which a user can download drivers for different
 devices.
-\subsection{Access Control}
+
+Other research has occurred with relation to the security, privacy, usage, and
+access control for home automation and home environments. Denning, Kohno, and
+Levy~\cite{modernHome} provides an overview of security and privacy issues
+related to home automation and Internet of Things devices. Fouladi and
+Ghanoun~\cite{zwavesecurity} provides a security evaluation of the Z-Wave
+communication used by some home automation devices. They perform an in depth
+analysis of the encryption and authentication happening in the application layer
+of the protocol.
+
+Brush et al.~\cite{homeAutomation} discusses the results of interviews conducted
+with families and individuals in regards to home automation usage. The
+interviews were designed to collect both positive and negative experiences from
+households that have used home automation for at least a year. The households
+interviewed varied in ability and whether or not they had installed the systems
+themselves or had used contractors.
+
+Bauer, Cranor, Reeder, Reiter, and Vaniea~\cite{policyCreation} examines the
+usage of a distributed access control system in a campus environment to study
+the differences between physical key-based access control and an access control
+system as well as the differences between ideal access control policies and real
+access control policies used by the different types of access control systems.
+Mazurek et al.~\cite{accessControl} discusses the results of interviews
+conducted with families and individuals in regards to thoughts and practices for
+access control for data in home environments. Ur, Jung, and
+Schechter~\cite{currentState} provides an analysis of access control needs for
+an LED color-changing light bulb, wireless scale, and wireless keypad door lock
+with suggestions for access control requirements for home automation systems.
