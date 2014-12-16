@@ -1,2 +1,52 @@
 \section{Implementation}
 \label{sec:implementation}
+The architecture discussed in Section~\ref{sec:arch} is implemented as a core
+system, a user interface, and a set of modules.
+\subsection{Core System}
+\label{sec:core}
+\subsection{Modules}
+\label{sec:modules}
+\subsection{User Interface}
+\label{sec:interface}
+\subsection{Access Control}
+\label{sec:access}
+Access control is divided into two types: core system access control and module
+access control.
+\subsubsection{Core System Access Control}
+The access control available for the core system (discussed in
+Section~\ref{sec:core}) is designed to handle administrative tasks within the
+core system. Users are divided into different levels of access. Currently there
+are eight levels of granularity ranging from guests with minimal access to
+full administrative users which have full permissions. Administrative tasks for
+the core system include user account creation and modification, group creation
+and assignment, and module access control administration.
+
+Each user is assigned an access level which is then used to determine which
+commands the user can run. Each command is assigned a minimum access level.
+When a user attempts to run the command, the access level of the user trying to
+run the command is compared to the minimum access level of the command. If the
+user's access level is greater than or equal to the minimum access level
+assigned to the command, the user is able to run the command.
+\subsubsection{Module Access Control}
+Module access control provides access control between modules which are
+discussed in more detail in Section~\ref{sec:modules}. The access control
+policies consist of a set of rules. Each rule consists of: a source module, a
+destination module, the days of the week the rule applies to, the start and end
+times for those days, the user group the rule applies to, the priority of the
+rule, and the access mode.
+
+When a user tries to use a module (either directly or indirectly), the system
+looks for a rule that applies to the use. If a rule is found where the source
+and destination modules match, then the system makes sure the current time and
+day of the week match the rule and the user is part of the user group assigned
+to the rule. The priority portion of the rule is used in case of conflicting
+access to the same module. The access mode can be either ``allow'' or ``ask.''
+When the mode is ``allow,'' the interaction is automatically allowed. When the
+mode is ``ask,'' a user is asked interactively to allow the interaction at the
+time of access. Our system currently does not support the priority or access
+mode portions of the rules.
+
+Users are able to query the system to either figure out what modules a user can
+access at a given time based on the groups he or she is in or figure out who can
+access a given module. This allows the user to more reliably verify that the
+access granted fits his or her expectations.
