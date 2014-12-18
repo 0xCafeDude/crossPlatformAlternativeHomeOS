@@ -9,15 +9,15 @@ import edu.utah.cs6964.management.access.DayOfWeek;
 import edu.utah.cs6964.management.access.Time;
 import edu.utah.cs6964.modules.Module;
 
-public class ServiceManager {
+public class ModulesManager {
 	List<Module> systemModules = new ArrayList<Module>();
-	private static ServiceManager serviceManagerInstance = new ServiceManager();
+	private static ModulesManager serviceManagerInstance = new ModulesManager();
 	
-	private ServiceManager() {
+	private ModulesManager() {
 		
 	}
 	
-	public static ServiceManager getInstance() {
+	public static ModulesManager getInstance() {
 		return serviceManagerInstance;
 	}
 	

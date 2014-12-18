@@ -5,14 +5,14 @@ import java.util.List;
 
 import edu.utah.cs6964.devices.zwave.RGBBulb;
 import edu.utah.cs6964.drivers.Node;
-import edu.utah.cs6964.management.ServiceManager;
+import edu.utah.cs6964.management.ModulesManager;
 import edu.utah.cs6964.roles.devices.Device;
 
 public class DeviceManager {
 	
 	private static DeviceManager deviceManagerInstance = new DeviceManager();
 	private List<Device> allDevices = new ArrayList<Device>();
-	private ServiceManager serviceManager = ServiceManager.getInstance();
+	private ModulesManager serviceManager = ModulesManager.getInstance();
 	
 	public List<Device> getAllDevices() {
 		return allDevices;

@@ -11,7 +11,7 @@ import java.util.List;
 import edu.utah.cs6964.drivers.zwave.ZWave;
 import edu.utah.cs6964.exceptions.MissingRolesException;
 import edu.utah.cs6964.exceptions.ModuleNotStartedException;
-import edu.utah.cs6964.management.ServiceManager;
+import edu.utah.cs6964.management.ModulesManager;
 import edu.utah.cs6964.modules.Module;
 
 /**
@@ -198,7 +198,7 @@ public class RGBBulb implements edu.utah.cs6964.roles.devices.lights.DimmingLigh
 	}
 
 	private boolean getRequiredRolesFromServiceManager() throws MissingRolesException {
-		this.conn = (ZWave)ServiceManager.getInstance().getRole(this, requiredRoles.get(0));
+		this.conn = (ZWave)ModulesManager.getInstance().getRole(this, requiredRoles.get(0));
 		if (this.conn == null) {
 			return false;
 		}

@@ -6,7 +6,7 @@ import java.util.List;
 import edu.utah.cs6964.devices.zwave.RGBBulb;
 import edu.utah.cs6964.exceptions.MissingRolesException;
 import edu.utah.cs6964.exceptions.ModuleNotStartedException;
-import edu.utah.cs6964.management.ServiceManager;
+import edu.utah.cs6964.management.ModulesManager;
 import edu.utah.cs6964.modules.Module;
 import edu.utah.cs6964.roles.applications.Application;
 import edu.utah.cs6964.roles.devices.Device;
@@ -88,7 +88,7 @@ public class ApplicationForLightBulb implements Module, Application {
 	}
 
 	private boolean getRequiredRolesFromServiceManager() throws MissingRolesException {
-		this.rgbBulb = (Device)ServiceManager.getInstance().getRole(this, requiredRoles.get(0));
+		this.rgbBulb = (Device)ModulesManager.getInstance().getRole(this, requiredRoles.get(0));
 		if (this.rgbBulb == null) {
 			return false;
 		}

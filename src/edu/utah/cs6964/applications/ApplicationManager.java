@@ -3,13 +3,13 @@ package edu.utah.cs6964.applications;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.utah.cs6964.management.ServiceManager;
+import edu.utah.cs6964.management.ModulesManager;
 import edu.utah.cs6964.modules.Module;
 import edu.utah.cs6964.roles.applications.Application;
 
 public class ApplicationManager {
 	
-	private ServiceManager serviceManger = ServiceManager.getInstance();
+	private ModulesManager serviceManger = ModulesManager.getInstance();
 	private static ApplicationManager applManagerInstance = new ApplicationManager();
 	private List<Application> applList = new ArrayList<Application>();
 	
