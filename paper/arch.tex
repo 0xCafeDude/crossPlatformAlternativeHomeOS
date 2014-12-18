@@ -6,8 +6,8 @@
     \caption{Architecture}
     \label{Fig:Arch}
 \end{figure}
-Figure~\ref{Fig:Arch} gives an overview of the architecture. Our system
-consists of four main components: Management Component, Applications,
+Figure~\ref{Fig:Arch} provides an overview of the architecture for our system.
+Our system consists of four main components: Management Component, Applications,
 Devices, and Protocols. The management component plays the central role of our
 system. It handles the access control and communication between the other
 components. All applications, devices, and protocols serve as modules and
@@ -24,10 +24,10 @@ control rules for components, installing and uninstalling new components,
 activating and deactivating installed components, and resolving dependencies
 for components. 
 
-When a component (other than Management Component) wants to interact with
-another component it has to go through the Management Component. To the
+When a component (other than the Management Component) wants to interact with
+another component, it has to go through the Management Component. To the
 Management Component, all other components are viewed as modules which are
-described in more detail in Section~\ref{sec:mods}. When a component requests
+described in more detail in Section~\ref{sec:mods}. When one component requests
 to interact with another component, the Management Component first checks
 against the access control rules before allowing the interaction to happen.
 Access Control is described in more detail in Section~\ref{sec:access}.
@@ -37,8 +37,8 @@ While the Management Component provides the core functionality of the system,
 Applications provide functionality to the user. Applications facilitate
 interactions between users and other components (besides the Management
 Component). For instance, an application could turn on a light when a door is
-unlocked. The Applications are built as modules which are then loaded into the
-system.
+unlocked. The Applications are built as modules which are then are individually
+loaded into the system.
 \subsection{Devices}
 \label{sec:devices}
 Devices provide interaction capability with the physical environment. Each
@@ -49,13 +49,13 @@ Physical devices can include various types of sensors, light bulbs, door locks,
 etc.
 \subsection{Protocols}
 \label{sec:protocols}
-Protocols provides an abstraction for communication protocols. These modules
+Protocols provide an abstraction for communication protocols. These modules
 allow device modules to interact with the physical devices. They also provide
 the Management Component with information such as whether a physical device is
-active or a new physical device is discovered.
+active or inactive or a new physical device is discovered.
 \subsection{Modules}
 \label{sec:mods}
-Module is an interface that allows the Management Component to communicate
+A module is an interface that allows the Management Component to communicate
 with the rest of the components in the system. All Applications, Devices, and
 Protocols have to implement this interface. Every module has the capability to
 start, stop, and tell the Management Component the list of roles (described in 
@@ -68,8 +68,8 @@ For example, a module implementing the "light bulb" role will provide functions
 for turning on and off a light bulb. Roles play a critical role when two
 modules interact. For example, if an application wants to turn on a light bulb,
 the application requests a module that implements the "light bulb" role from 
-the Management Component. At this point the Management Component searches for a
-loaded module which implements that role and check whether the requesting
-module is allowed to access the module implementing the role. If the Managment
-Component returns a module implementing that role, the application then uses
-that returned module to turn on the light bulb.
+the Management Component. At this point, the Management Component searches for a
+loaded module which implements that role and checks whether or not the
+requesting module is allowed to access the module implementing the role. If the
+Managment Component returns a module implementing that role, the application
+then uses that returned module to turn on the light bulb.
