@@ -1,11 +1,38 @@
 \section{Implementation}
 \label{sec:implementation}
 The architecture discussed in Section~\ref{sec:arch} is implemented as a core
-system, a user interface, and a set of modules.
+system, a user interface, and a set of modules. The system is written in Java.
 \subsection{Core System}
 \label{sec:core}
+The core system is responsible for starting up the whole system. It first reads
+the config file and establishes connection with the data backend. The core
+system is flexible as far as the backend is concerned and can communicate with
+a variety of backends including mysql, oracle, or just flat files. The data
+backend provides storage and lookup capabilities for user account informaton,
+group information, access control information (as described in
+Section~\ref{sec:access}), and component information. Once the connection to
+the data backend has been established, it loads all the protocols, devices, and
+applications modules in order. The core system contains an Application Manager,
+Device Manager, and a Protocol Manager to manage the various types of
+components. It also keeps track of currently logged in users.
 \subsection{Modules}
 \label{sec:modules}
+\begin{table}
+\begin{center}
+\begin{tabular}{| l | p{5cm} |}
+\hline
+start() & Used by Management Component to start the module \\ \hline
+stop() & Used by Management Component to stop the module \\ \hline
+setModuleId() & Used by Management Component to give the module an id \\ \hline
+getModuleId() & Used by Management Component to get id of the module \\ \hline
+\end{tabular}
+\end{center}
+\caption{Module Interface}
+\label{tab:module}
+\end{table}
+All applications, devices and protocols implement the Module interface. The
+Module interface is required for a component to interact with the Management 
+Component. Table~\ref{tab:module} provides an overview of the module interface.
 \subsection{User Interface}
 \label{sec:interface}
 \subsection{Access Control}

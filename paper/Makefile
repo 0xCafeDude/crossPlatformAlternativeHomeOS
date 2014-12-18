@@ -5,7 +5,7 @@ confirmation.pdf: confirmation.tex
 	pdflatex confirmation
 	pdflatex confirmation
 
-paper.pdf: biblio.bib paper.tex abstract.tex intro.tex related.tex arch.tex implementation.tex future.tex
+paper.pdf: biblio.bib paper.tex abstract.tex intro.tex related.tex arch.tex implementation.tex challenges.tex future.tex
 	pdflatex paper
 	bibtex paper
 	pdflatex paper

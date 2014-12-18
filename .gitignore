@@ -11,6 +11,7 @@ paper/*.bbl
 paper/*.blg
 paper/*.log
 paper/*.pdf
+paper/*.out
 
 progress reports/*.aux
 progress reports/*.bbl

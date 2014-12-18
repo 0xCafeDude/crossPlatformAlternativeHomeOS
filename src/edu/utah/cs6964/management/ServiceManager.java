@@ -1,14 +1,13 @@
 package edu.utah.cs6964.management;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-import edu.utah.cs6964.modules.Module;
 import edu.utah.cs6964.management.access.AccessRule;
 import edu.utah.cs6964.management.access.DayOfWeek;
 import edu.utah.cs6964.management.access.Time;
-import java.util.Calendar;
-import javax.management.relation.Role;
+import edu.utah.cs6964.modules.Module;
 
 public class ServiceManager {
 	List<Module> systemModules = new ArrayList<Module>();
