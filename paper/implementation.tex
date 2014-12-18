@@ -19,16 +19,17 @@ components. It also keeps track of currently logged in users.
 \label{sec:modules}
 \begin{table}
 \begin{center}
-\begin{tabular}{| l | p{5cm} |}
+\begin{tabular}{| p{4cm} | p{3cm} |}
 \hline
 start() & Used by Management Component to start the module \\ \hline
 stop() & Used by Management Component to stop the module \\ \hline
 setModuleId() & Used by Management Component to give the module an id \\ \hline
 getModuleId() & Used by Management Component to get id of the module \\ \hline
-getOfferedRoles() & Used by Management Component to get the list of roles offered by the module \\ \hline
-serviceRegistered(List<Role> roles) & Used by the Management Component to tell
+getOfferedRoles() & Used by Management Component to get the list of roles
+offered by the module \\ \hline
+serviceRegistered(roles) & Used by the Management Component to tell
 the module that new roles are available \\ \hline
-serviceDeRegistered(List<Role> roles) & Used by the Management Componet to tell
+serviceDeRegistered(roles) & Used by the Management Componet to tell
 the module that some roles are unavailable \\ \hline
 \end{tabular}
 \end{center}
@@ -37,7 +38,7 @@ the module that some roles are unavailable \\ \hline
 \end{table}
 \begin{table}
 \begin{center}
-\begin{tabular}{| l | p{5cm} |}
+\begin{tabular}{| p{4cm} | p{3cm} |}
 \hline
 addModule() & adds a module to the system \\ \hline
 removeModule() & removes a module from the system \\ \hline
