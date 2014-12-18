@@ -25,12 +25,11 @@ start() & Used by Management Component to start the module \\ \hline
 stop() & Used by Management Component to stop the module \\ \hline
 setModuleId() & Used by Management Component to give the module an id \\ \hline
 getModuleId() & Used by Management Component to get id of the module \\ \hline
-getOfferedRoles() & Used by Management Component to get the list of roles
-offered by the module \\ \hline
+getOfferedRoles() & Used by Management Component to get the list of roles offered by the module \\ \hline
 serviceRegistered(List<Role> roles) & Used by the Management Component to tell
 the module that new roles are available \\ \hline
 serviceDeRegistered(List<Role> roles) & Used by the Management Componet to tell
-the module that some roles are unavailable & \\ \hline
+the module that some roles are unavailable \\ \hline
 \end{tabular}
 \end{center}
 \caption{Module Interface}
@@ -46,7 +45,7 @@ getRole(String role) & Used by a module to request the ModuleManager to grant
 access to a module offering the role sent as parameter  \\ \hline
 \end{tabular}
 \end{center}
-\caption{Module Interface}
+\caption{ModuleManager Interface}
 \label{tab:module}
 \end{table}
 All applications, devices and protocols implement the Module interface. The
