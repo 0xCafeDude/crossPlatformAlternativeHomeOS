@@ -5,37 +5,38 @@ system, a user interface, and a set of modules. The system is written in Java.
 \subsection{Core System}
 \label{sec:core}
 The core system is responsible for starting up the whole system. It first reads
-the config file and establishes connection with the data backend. The core
-system is flexible as far as the backend is concerned and can communicate with
-a variety of backends including mysql, oracle, or just flat files. The data
+the configuration file and establishes a connection with the data backend. The
+core system is flexible as far as the backend is concerned and can communicate
+with a variety of data backends including MySQL, Oracle, or flat files. The data
 backend provides storage and lookup capabilities for user account informaton,
 group information, access control information (as described in
 Section~\ref{sec:access}), and component information. Once the connection to
-the data backend has been established, it loads all the protocols, devices, and
-applications modules in order. The core system contains an Application Manager,
-Device Manager, and a Protocol Manager to manage the various types of
-components. It also keeps track of currently logged in users.
+the data backend has been established, the core system loads all the protocols,
+devices, and applications modules in order. The core system contains an
+Application Manager, Device Manager, and Protocol Manager to manage the various
+types of components. It also keeps track of currently logged in users.
 \subsection{Modules}
 \label{sec:modules}
 \begin{table}
 \begin{center}
 \begin{tabular}{| p{4cm} | p{3cm} |}
 \hline
-start() & Used by Management Component to start the module \\ \hline
-stop() & Used by Management Component to stop the module \\ \hline
-setModuleId() & Used by Management Component to give the module an id \\ \hline
-getModuleId() & Used by Management Component to get id of the module \\ \hline
-getOfferedRoles() & Used by Management Component to get the list of roles
+start() & Used by the Management Component to start the module \\ \hline
+stop() & Used by the Management Component to stop the module \\ \hline
+setModuleId() & Used by the Management Component to give the module an ID \\ \hline
+getModuleId() & Used by the Management Component to get the ID of the module \\ \hline
+getOfferedRoles() & Used by the Management Component to get the list of roles
 offered by the module \\ \hline
 serviceRegistered(roles) & Used by the Management Component to tell
 the module that new roles are available \\ \hline
-serviceDeRegistered(roles) & Used by the Management Componet to tell
-the module that some roles are unavailable \\ \hline
+serviceDeRegistered(roles) & Used by the Management Component to tell
+the module that some roles are no longer available \\ \hline
 \end{tabular}
 \end{center}
 \caption{Module Interface}
-\label{tab:modulemanager}
+\label{tab:module}
 \end{table}
+
 \begin{table}
 \begin{center}
 \begin{tabular}{| p{4cm} | p{3cm} |}
@@ -43,30 +44,31 @@ the module that some roles are unavailable \\ \hline
 addModule() & adds a module to the system \\ \hline
 removeModule() & removes a module from the system \\ \hline
 getRole(String role) & Used by a module to request the ModuleManager to grant
-access to a module offering the role sent as parameter  \\ \hline
+access to a module offering the role sent as the parameter  \\ \hline
 \end{tabular}
 \end{center}
 \caption{ModuleManager Interface}
-\label{tab:module}
+\label{tab:modulemanager}
 \end{table}
 All applications, devices and protocols implement the Module interface. The
 Module interface is required for a component to interact with the Management 
 Component. Table~\ref{tab:module} provides an overview of the module interface.
 Table~\ref{tab:modulemanager} provides an overview of the ModuleManager.
-ModuleManager is the part of the Management Component that interacts with
-modules. Each module can offer some roles and some modules might need some
-roles to fullfil their tasks. For example an application (which is also a
-module) that can turn on a light bulb would need a role called "light bulb".
-The application will ask the ModuleManager. There can be an other module called
-ZipatoLightBulb that would be offering the role "light bulb". If the
-application has necessary permissions the ModuleManger will allow the
+The ModuleManager is the part of the Management Component that interacts with
+modules. Each module can offer some roles. Some modules might need specific
+roles in order to fullfil their tasks. For example, an application (which is
+also a module) that can turn on a light bulb would need a role called ``light
+bulb.'' The application will ask the ModuleManager if there is a module that
+offers the role ``light bulb.'' There can be another module, called
+ZipatoLightBulb, that would be offering the role ``light bulb.'' If the
+application has necessary permissions, the ModuleManger will allow the
 application to interact with ZipatoLightBulb.
 \subsection{User Interface}
 \label{sec:interface}
-Right now our system has a command line interface. We have designed the user
-interface related parts of our system in such a way that it will be very easy
-to replace the cli in the future with some other interface. The cli first asks
-the user to log in. Ever user has an associated access level. 
+Currently, our system has a command line interface (CLI). We have designed the
+user interface-related parts of our system in such a manner that replacing the
+CLI with another interface in the future would be easily accomplished. The CLI
+first asks the user to log in. Every user has an associated access level.
 \subsection{Access Control}
 \label{sec:access}
 Access control is divided into two types: core system access control and module
@@ -74,38 +76,38 @@ access control.
 \subsubsection{Core System Access Control}
 The access control available for the core system (discussed in
 Section~\ref{sec:core}) is designed to handle administrative tasks within the
-core system. Users are divided into different levels of access. Currently there
-are eight levels of granularity ranging from guests with minimal access to
+core system. Users are divided into different levels of access. Currently, there
+are eight levels of granularity, ranging from guests with minimal access to
 full administrative users which have full permissions. Administrative tasks for
 the core system include user account creation and modification, group creation
 and assignment, and module access control administration.
 
-Each user is assigned an access level which is then used to determine which
+Each user is assigned an access level, which is then used to determine which
 commands the user can run. Each command is assigned a minimum access level.
 When a user attempts to run the command, the access level of the user trying to
 run the command is compared to the minimum access level of the command. If the
 user's access level is greater than or equal to the minimum access level
 assigned to the command, the user is able to run the command.
 \subsubsection{Module Access Control}
-Module access control provides access control between modules which are
+Module access control provides access control between modules, which are
 discussed in more detail in Section~\ref{sec:modules}. The access control
 policies consist of a set of rules. Each rule consists of: a source module, a
-destination module, the days of the week the rule applies to, the start and end
-times for those days, the user group the rule applies to, the priority of the
-rule, and the access mode.
+destination module, the days of the week to which the rule applies, the start
+and end times for those days, the user group to which the rule applies, the
+priority of the rule, and the access mode.
 
 When a user tries to use a module (either directly or indirectly), the system
 looks for a rule that applies to the use. If a rule is found where the source
 and destination modules match, then the system makes sure the current time and
 day of the week match the rule and the user is part of the user group assigned
-to the rule. The priority portion of the rule is used in case of conflicting
-access to the same module. The access mode can be either ``allow'' or ``ask.''
-When the mode is ``allow,'' the interaction is automatically allowed. When the
-mode is ``ask,'' a user is asked interactively to allow the interaction at the
-time of access. Our system currently does not support the priority or access
-mode portions of the rules.
+to the rule. The priority portion of the rule is used in the event of
+conflicting access to the same module. The access mode can be either ``allow''
+or ``ask.'' When the mode is ``allow,'' the interaction is automatically
+allowed. When the mode is ``ask,'' a user is asked interactively to allow the
+interaction at the time of access. Our system currently does not support the
+priority or access mode portions of the rules.
 
-Users are able to query the system to either figure out what modules a user can
-access at a given time based on the groups he or she is in or figure out who can
-access a given module. This allows the user to more reliably verify that the
+Users are able to query the system to either figure out which modules a user can
+access at a given time, based on the groups he or she is in, or figure out who
+can access a given module. This allows the user to more reliably verify that the
 access granted fits his or her expectations.
