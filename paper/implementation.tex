@@ -1,7 +1,8 @@
 \section{Implementation}
 \label{sec:implementation}
 The architecture discussed in Section~\ref{sec:arch} is implemented as a core
-system, a user interface, and a set of modules. The system is written in Java.
+system, a user interface, a set of modules, and a set of roles. A major part of
+the core system is access control. The system is written in Java.
 \subsection{Core System}
 \label{sec:core}
 The core system is responsible for starting up the whole system. It first reads
@@ -14,7 +15,9 @@ Section~\ref{sec:access}), and component information. Once the connection to
 the data backend has been established, the core system loads all the protocols,
 devices, and applications modules in order. The core system contains an
 Application Manager, Device Manager, and Protocol Manager to manage the various
-types of components. It also keeps track of currently logged in users.
+types of components. When the system starts, the manaagers are responsible for
+loading the components and keeping track of which components are active. The
+core system also keeps track of currently logged in users.
 \subsection{Modules}
 \label{sec:modules}
 \begin{table}

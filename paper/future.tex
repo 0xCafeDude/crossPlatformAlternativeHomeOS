@@ -1,23 +1,17 @@
-\section{Conclusion and Future Work}
+\section{Results and Future Work}
 \label{sec:future}
-Our alternative to HomeOS continues the work started by HomeOS by providing
-cross-platform support while still providing a PC-like abstraction for home
-automation devices. Our alternative is written in Java and uses open source
-software to try to maximize cross-platform capabilities. We have implemented the
-core system, but more work is needed to provide all of the same capabilities as
-HomeOS.
-
-Future work includes adding additional functionality and continuing to expand
-the API available to users and developers, as well as making extension of the
-system easier. We talk about this in more detail below.
-
 Currently, our system only supports the Z-Wave protocol. We want
 to add support for protcols such as Bluetooth, Wi-Fi, ZigBee, etc. We currently
 have a device driver only for the Zipato RGBW light bulb. We would like to add
 drivers for music players, thermostats, security cameras, motion detectors, etc.
 This will allow us to create applications with richer functionality like having
 a light start blinking and starting a security camera when movement is detected
-by a motion sensor.
+by a motion sensor. Currently, we have an application that can turn on and off a
+light bulb.
+
+Future work includes adding additional functionality and continuing to expand
+the API available to users and developers, as well as making extension of the
+system easier. We talk about this in more detail below.
 
 We want to create an infrastructure that can allow the users to easily install
 new components and roles. Similar to HomeOS, we envision having packages that
