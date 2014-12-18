@@ -1,37 +1,40 @@
 \section{Challenges}
 \label{sec:challenges}
 While developing the system we had to overcome a number of challenges. We have 
-mentioned them below.
+mentioned some of them below.
 
-The first challange we faced was in installation of the drivers for the zwave
-controller. The drivers were not compatible with our kernel version ( Ubuntu 
-3.13.0-43-generic). We started modifying the existing driver source but 
+The first challenge we faced was in installation of the drivers for the Z-Wave
+controller. The drivers were not compatible with our kernel version (Ubuntu 
+3.13.0-43-generic). We started modifying the existing driver source, but 
 eventually we were able to find drivers that had been modified to work with our
 system.
 
 The second challenge we faced was in building the Java wrappers for the
 OpenZWave library. The build process for the Java wrappers requires the path to
 the directory containing the source code for OpenZWave. If the OpenZWave
-directory contains the source code as well as the binaries, the building of the
-Java wrappers failed. After a lot of hit and trail we were luckily able to find
-this out and fix it.
+source code library had been previously built using the included Makefile, the
+building of the Java wrappers failed. After a lot of trial and error we were
+able to find this out and fix it.
 
 The third challenge we faced was in changing the color of the light bulb. The
 OpenZWave library doesn't support that yet. We decided to write our own code to
 do that. We were not able to find out the exact message that needs to be sent to
 the bulb in order to change its color. The original Z-Wave library is
 proprietary and there is no freely available documentation for it. Most of the 
-OpenZWave library has been developed by reverse engineering and hit and trial.
+OpenZWave library has been developed by reverse engineering and trial and error.
 The OpenZWave forum helped us here and told us that device needs to be sent an
 RGB value to change its color. The exact byte sequence that needs to be sent
-will contain the following
-0x20x"Red color value"0x3"Green color value"0x4"Blue color value".
+will contain the following 0x02 ``Red color value'' 0x03 ``Green color value''
+0x04 ``Blue color value,'' where the red, green, and blue color values are
+between 0 and 255 inclusive. For example, to make the light be completely red,
+the following byte sequence would be sent: 0x02 0xFF 0x03 0x00 0x04 0x00.
 
-The last challenge was because of Java not allowing us to free memory on demand.
-When ManagementComponent approves the request of Module1 to communicate with
-Module2 it sends an instance of Module2 to the requesting instance of Module1.
-In the original HomeOS paper if the ManagementComponent later decides to revoke
-Module1's capability to access Module2 it simply frees the memory occupied by
-the instance of Module2 this is something that we cannot do in Java. Hence we 
-had to redesign our system and force all communication that can happen between
-modules to go through the ManagementComponent.  
+The last challenge was dealing with the fact that Java does not allow us to free
+memory on demand. When the Management Component approves the request of a Module
+(Module1) to communicate with another module (Module2), it sends a reference for
+Module2 to Module1. In the original HomeOS paper, if the Management Component
+later decides to revoke Module1's capability to access Module2, it simply frees
+the memory occupied by the instance of Module2. This is something that we
+cannot do in Java. Hence we had to redesign our system and force all
+communication that can happen between modules to go through the
+Management Component.

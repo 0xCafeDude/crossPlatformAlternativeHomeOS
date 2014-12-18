@@ -39,11 +39,11 @@ the module that some roles are no longer available \\ \hline
 
 \begin{table}
 \begin{center}
-\begin{tabular}{| p{4cm} | p{3cm} |}
+\begin{tabular}{| p{2.5cm} | p{4.5cm} |}
 \hline
 addModule() & adds a module to the system \\ \hline
 removeModule() & removes a module from the system \\ \hline
-getRole(String role) & Used by a module to request the ModuleManager to grant
+getRole(role) & Used by a module to request the ModuleManager to grant
 access to a module offering the role sent as the parameter  \\ \hline
 \end{tabular}
 \end{center}
@@ -65,17 +65,17 @@ application has necessary permissions, the ModuleManger will allow the
 application to interact with ZipatoLightBulb.
 \subsection{User Interface}
 \label{sec:interface}
-\begin{figure}[tbh]                                                             
-    \centering                                                                  
-    \includegraphics[width=1.0\columnwidth]{figs/cli.png}                
-    \caption{Command Line Interface Screenshot}                                                      
-    \label{Fig:cli}                                                            
+\begin{figure}[tbh]
+    \centering
+    \includegraphics[width=1.0\columnwidth]{figs/cli.png}
+    \caption{Command Line Interface Screenshot for Full Administrative User}
+    \label{Fig:cli}
 \end{figure}
 \begin{figure}[tbh]                                                             
-    \centering                                                                  
-    \includegraphics[width=1.0\columnwidth]{figs/cli2.png}                
-    \caption{Command Line Interface Screenshot}                                                      
-    \label{Fig:cli2}                                                            
+    \centering
+    \includegraphics[width=1.0\columnwidth]{figs/cli2.png}
+    \caption{Command Line Interface Screenshot for Guest User}
+    \label{Fig:cli2}
 \end{figure}
 Currently, our system has a command line interface (CLI). We have designed the
 user interface-related parts of our system in such a manner that replacing the
@@ -94,11 +94,15 @@ commands. In the figure, after the user has logged in, he requests that the
 system lists all commands available to him with the ``list'' command. Next, he
 runs the ``applications'' command to view a list of currently available
 applications (in this case our example application of turning a light bulb on
-and off). Then, he runs our example application and quits. Whereas in
-Figure~\ref{Fig:cli2} the user does not have permissions to view user and group
-information. The user also does not have the permissions to run the example
-application. Hence when the user tries to run it the system throws a
-MissingRolesException.
+and off). Then, he runs our example application and quits.
+
+Figure~\ref{Fig:cli2} is a screenshot of the CLI when a ``guest'' user runs the
+same commands as the user in Figure~\ref{Fig:cli}. The user does not have
+permissions to do anything other than view what applications are available and
+attempt to run an application. The guest user is not part of a group which is
+allowed to run the example application so when the user tries to run it the
+system throws a MissingRolesException indicating that required roles were not
+available to the user.
 \subsection{Access Control}
 \label{sec:access}
 Access control is divided into two types: core system access control and module

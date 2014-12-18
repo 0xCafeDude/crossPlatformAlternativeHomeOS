@@ -43,12 +43,14 @@ While the Management Component provides the core functionality of the system,
 Applications provide functionality to the user. Applications facilitate
 interactions between users and other components (besides the Management
 Component). For instance, an application could turn on a light when a door is
-unlocked. The Applications are built as modules which are then are individually
-loaded into the system. The Applications code is developed against our system.
+unlocked.
+
+The Applications are built as modules which are then are individually loaded
+into the system. The Applications code is developed against our system.
 Figure~\ref{Fig:appcode} shows a snippet of the code of the example application
 that we developed. The application developer does not have to worry about which
 protocol the light bulb uses to communicate, which manufacturer built that light
-bulb etc.
+bulb, etc.
 \subsection{Devices}
 \label{sec:devices}
 Devices provide interaction capability with the physical environment. Each
@@ -56,9 +58,10 @@ device is accessed through a device driver module which is loaded into the
 system. These modules are also responsible for interacting with the
 communication protocol modules. As described in Section~\ref{sec:protocols}.
 Physical devices can include various types of sensors, light bulbs, door locks,
-etc. Devices take care of the heteroginity that can exist in them. Other parts
-of the system that communicate with Devices don't have to worry about the lower
-level details regarding the actual physical device.
+etc. Our device abstraction takes care of the heterogeneity that can exist with
+the physical devices. Other parts of the system that communicate with Devices
+don't have to worry about the lower level details regarding the actual physical
+device.
 \subsection{Protocols}
 \label{sec:protocols}
 Protocols provide an abstraction for communication protocols. These modules
@@ -76,10 +79,10 @@ other through the use of roles.
 \subsection{Roles}
 \label{sec:roles}
 A role is an interface that describes the functionality a module can provide. 
-For example, a module implementing the "light bulb" role will provide functions
+For example, a module implementing the ``light bulb'' role will provide functions
 for turning on and off a light bulb. Roles play a critical role when two
 modules interact. For example, if an application wants to turn on a light bulb,
-the application requests a module that implements the "light bulb" role from 
+the application requests a module that implements the ``"light bulb'' role from 
 the Management Component. At this point, the Management Component searches for a
 loaded module which implements that role and checks whether or not the
 requesting module is allowed to access the module implementing the role. If the
