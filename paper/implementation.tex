@@ -103,6 +103,29 @@ attempt to run an application. The guest user is not part of a group which is
 allowed to run the example application so when the user tries to run it the
 system throws a MissingRolesException indicating that required roles were not
 available to the user.
+\subsection{Roles}
+\label{sec:rolesimpl}
+\begin{table}
+\begin{center}
+\begin{tabular}{| p{2.5cm} | p{4.5cm} |}
+\hline
+turnOn() & turns on the light bulb\\ \hline
+turnOff() & turns off the light bulb\\ \hline
+setColor(Color RGB value) & sets the color of the RGB bulb to the value sent as
+parameter \\ \hline
+getColor() & gets the current color of the light bulb \\ \hline
+\end{tabular}
+\end{center}
+\caption{Light bulb Role}
+\label{tab:rolestable}
+\end{table}
+Roles are a set of interfaces. These interfaces are used to specify the
+functionality that is provided by a module. Table~\ref{tab:rolestable} gives an
+overview of the role supported by the Light Bulb module. These roles play a
+major part when one component ( other than the management component) interacts
+with another component. The Management Component doesn't not have to worry about
+the specific functionality provided by a module and hence doesn't used the role
+interface.
 \subsection{Access Control}
 \label{sec:access}
 Access control is divided into two types: core system access control and module
