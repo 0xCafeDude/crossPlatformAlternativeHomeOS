@@ -129,7 +129,11 @@ discussed in more detail in Section~\ref{sec:modules}. The access control
 policies consist of a set of rules. Each rule consists of: a source module, a
 destination module, the days of the week to which the rule applies, the start
 and end times for those days, the user group to which the rule applies, the
-priority of the rule, and the access mode.
+priority of the rule, and the access mode. For example, an access control rule
+could be that users that are part of the group ``Kids'' are able to use Module
+``Application 1'' to interact with Module ``TV'' on Monday, Wednesday, and
+Friday between the hours of 6 PM and 8 PM without needing further approval from
+an administrator (parent).
 
 When a user tries to use a module (either directly or indirectly), the system
 looks for a rule that applies to the use. If a rule is found where the source
@@ -140,7 +144,8 @@ conflicting access to the same module. The access mode can be either ``allow''
 or ``ask.'' When the mode is ``allow,'' the interaction is automatically
 allowed. When the mode is ``ask,'' a user is asked interactively to allow the
 interaction at the time of access. Our system currently does not support the
-priority or access mode portions of the rules.
+priority or access mode portions of the rules (all accesses have equal priority
+and the access mode is considered to be ``allow'').
 
 Users are able to query the system to either figure out which modules a user can
 access at a given time, based on the groups he or she is in, or figure out who
