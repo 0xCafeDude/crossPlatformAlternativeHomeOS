@@ -65,10 +65,24 @@ application has necessary permissions, the ModuleManger will allow the
 application to interact with ZipatoLightBulb.
 \subsection{User Interface}
 \label{sec:interface}
-Currently, our system has a command line interface (CLI). We have designed the
-user interface-related parts of our system in such a manner that replacing the
-CLI with another interface in the future would be easily accomplished. The CLI
-first asks the user to log in. Every user has an associated access level.
+Right now our system has a command line interface. We have designed our user
+interface to be easily replacable. The user interface from the rest of the
+systems point of view can ask for a list of commands and can then choose to
+execute one. The commands that are currently supported by our system are view
+users, view groups, view access levels, view users in group, view applications
+and run application.
+
+The cli first asks the user to log in. The cli then asks the core system for a
+list of commands to display to the user. The core system depending on the users
+access level returns a list. The user can choose to execute any one of those
+commands which is then executed by the core system. Figure~\ref{Fig:cli} is a 
+screenshot of the cli.
+\begin{figure}[tbh]                                                             
+    \centering                                                                  
+    \includegraphics[width=1.0\columnwidth]{figs/cli.png}                
+    \caption{Command Line Interface Screenshot}                                                      
+    \label{Fig:cli}                                                            
+\end{figure} 
 \subsection{Access Control}
 \label{sec:access}
 Access control is divided into two types: core system access control and module
