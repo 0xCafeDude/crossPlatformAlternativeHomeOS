@@ -71,6 +71,12 @@ application to interact with ZipatoLightBulb.
     \caption{Command Line Interface Screenshot}                                                      
     \label{Fig:cli}                                                            
 \end{figure}
+\begin{figure}[tbh]                                                             
+    \centering                                                                  
+    \includegraphics[width=1.0\columnwidth]{figs/cli2.png}                
+    \caption{Command Line Interface Screenshot}                                                      
+    \label{Fig:cli2}                                                            
+\end{figure}
 Currently, our system has a command line interface (CLI). We have designed the
 user interface-related parts of our system in such a manner that replacing the
 CLI with another interface in the future would be easily accomplished. The CLI
@@ -88,8 +94,11 @@ commands. In the figure, after the user has logged in, he requests that the
 system lists all commands available to him with the ``list'' command. Next, he
 runs the ``applications'' command to view a list of currently available
 applications (in this case our example application of turning a light bulb on
-and off). Then, he runs our example application and quits.
-
+and off). Then, he runs our example application and quits. Whereas in
+Figure~\ref{Fig:cli2} the user does not have permissions to view user and group
+information. The user also does not have the permissions to run the example
+application. Hence when the user tries to run it the system throws a
+MissingRolesException.
 \subsection{Access Control}
 \label{sec:access}
 Access control is divided into two types: core system access control and module

@@ -33,12 +33,22 @@ against the access control rules before allowing the interaction to happen.
 Access Control is described in more detail in Section~\ref{sec:access}.
 \subsection{Applications}
 \label{sec:apps}
+\begin{figure}[tbh]                                                              
+    \centering                                                                   
+    \includegraphics[width=1.0\columnwidth]{figs/appcode.png}                       
+    \caption{Example application code snippet}                                  
+    \label{Fig:appcode}                                                             
+\end{figure} 
 While the Management Component provides the core functionality of the system,
 Applications provide functionality to the user. Applications facilitate
 interactions between users and other components (besides the Management
 Component). For instance, an application could turn on a light when a door is
 unlocked. The Applications are built as modules which are then are individually
-loaded into the system.
+loaded into the system. The Applications code is developed against our system.
+Figure~\ref{Fig:appcode} shows a snippet of the code of the example application
+that we developed. The application developer does not have to worry about which
+protocol the light bulb uses to communicate, which manufacturer built that light
+bulb etc.
 \subsection{Devices}
 \label{sec:devices}
 Devices provide interaction capability with the physical environment. Each
@@ -46,7 +56,9 @@ device is accessed through a device driver module which is loaded into the
 system. These modules are also responsible for interacting with the
 communication protocol modules. As described in Section~\ref{sec:protocols}.
 Physical devices can include various types of sensors, light bulbs, door locks,
-etc.
+etc. Devices take care of the heteroginity that can exist in them. Other parts
+of the system that communicate with Devices don't have to worry about the lower
+level details regarding the actual physical device.
 \subsection{Protocols}
 \label{sec:protocols}
 Protocols provide an abstraction for communication protocols. These modules
