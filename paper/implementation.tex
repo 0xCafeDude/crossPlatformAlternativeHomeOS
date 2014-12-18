@@ -106,7 +106,11 @@ available to the user.
 \subsection{Access Control}
 \label{sec:access}
 Access control is divided into two types: core system access control and module
-access control.
+access control. Access control is split into two distinct types to capture the
+differing requirements between accessing the core system, which is relatively
+static, and accessing modules, which are relatively dynamic, as well as the
+differing purposes the access to the resources represents. Next, we discuss the
+two types of access control in more detail.
 \subsubsection{Core System Access Control}
 \label{sec:core_access}
 The access control available for the core system (discussed in
@@ -126,14 +130,18 @@ assigned to the command, the user is able to run the command.
 \subsubsection{Module Access Control}
 Module access control provides access control between modules, which are
 discussed in more detail in Section~\ref{sec:modules}. The access control
-policies consist of a set of rules. Each rule consists of: a source module, a
-destination module, the days of the week to which the rule applies, the start
-and end times for those days, the user group to which the rule applies, the
-priority of the rule, and the access mode. For example, an access control rule
-could be that users that are part of the group ``Kids'' are able to use Module
-``Application 1'' to interact with Module ``TV'' on Monday, Wednesday, and
-Friday between the hours of 6 PM and 8 PM without needing further approval from
-an administrator (parent).
+policies consist of a set of rules. These rules are set up by the user.
+
+Each rule consists of: a source module, a destination module, the days of the
+week to which the rule applies, the start and end times for those days, the user
+group to which the rule applies, the priority of the rule, and the access mode.
+For example, an access control rule could be that users that are part of the
+group ``Kids'' are able to use Module ``Application 1'' to interact with Module
+``TV'' on Monday, Wednesday, and Friday between the hours of 6 PM and 8 PM
+without needing further approval from an administrator (parent). Each rule
+explicitly grants permission to a user to perform an action, with approval if
+necessary. If no rule is found for a scenario, the default action is taken,
+which is to not allow the action to occur.
 
 When a user tries to use a module (either directly or indirectly), the system
 looks for a rule that applies to the use. If a rule is found where the source
@@ -145,9 +153,14 @@ or ``ask.'' When the mode is ``allow,'' the interaction is automatically
 allowed. When the mode is ``ask,'' a user is asked interactively to allow the
 interaction at the time of access. Our system currently does not support the
 priority or access mode portions of the rules (all accesses have equal priority
-and the access mode is considered to be ``allow'').
+and the access mode is considered to be ``allow''). If multiple rules to a given
+scenario, the permission given to the user is the union of the accesses.  For
+example, if a user is part of the groups ``Admin'' and ``Users'' and there is a
+rule that allows a ``User'' to access a module with permission and another rule
+that allows an ``Admin'' to access the same module automatically, access will be
+granted as an ``Admin'' instead of as a ``User.''
 
-Users are able to query the system to either figure out which modules a user can
-access at a given time, based on the groups he or she is in, or figure out who
+Users are able to query the system to either determine which modules a user can
+access at a given time, based on the groups he or she is in, or determine who
 can access a given module. This allows the user to more reliably verify that the
 access granted fits his or her expectations.
