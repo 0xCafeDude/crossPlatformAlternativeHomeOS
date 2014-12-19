@@ -7,15 +7,15 @@ the core system is access control. The system is written in Java.
 \label{sec:core}
 The core system is responsible for starting up the whole system. It first reads
 the configuration file and establishes a connection with the data backend. The
-core system is flexible as far as the backend is concerned and can communicate
-with a variety of data backends including MySQL, Oracle, or flat files. The data
-backend provides storage and lookup capabilities for user account informaton,
-group information, access control information (as described in
-Section~\ref{sec:access}), and component information. Once the connection to
+core system is flexible as far as the data backend is concerned and can
+communicate with a variety of data backends including MySQL, Oracle, or flat
+files. The data backend provides storage and lookup capabilities for user
+account information, group information, access control information (as described
+in Section~\ref{sec:access}), and component information. Once the connection to
 the data backend has been established, the core system loads all the protocols,
-devices, and applications modules in order. The core system contains an
+devices, and application modules in order. The core system contains an
 Application Manager, Device Manager, and Protocol Manager to manage the various
-types of components. When the system starts, the manaagers are responsible for
+types of components. When the system starts, the managers are responsible for
 loading the components and keeping track of which components are active. The
 core system also keeps track of currently logged in users.
 \subsection{Modules}
@@ -59,7 +59,7 @@ Component. Table~\ref{tab:module} provides an overview of the module interface.
 Table~\ref{tab:modulemanager} provides an overview of the ModuleManager.
 The ModuleManager is the part of the Management Component that interacts with
 modules. Each module can offer some roles. Some modules might need specific
-roles in order to fullfil their tasks. For example, an application (which is
+roles in order to fulfill their tasks. For example, an application (which is
 also a module) that can turn on a light bulb would need a role called ``light
 bulb.'' The application will ask the ModuleManager if there is a module that
 offers the role ``light bulb.'' There can be another module, called
@@ -93,9 +93,9 @@ implemented are: view users, view groups, view access levels, view users in
 group, view applications, and run application.
 
 Figure~\ref{Fig:cli} is a screenshot of the CLI for a user with access to all
-commands. In the figure, after the user has logged in, he requests that the
-system lists all commands available to him with the ``list'' command. Next, he
-runs the ``applications'' command to view a list of currently available
+commands. As shown in the figure, after the user has logged in, he requests that
+the system lists all commands available to him with the ``list'' command. Next,
+he runs the ``applications'' command to view a list of currently available
 applications (in this case our example application of turning a light bulb on
 and off). Then, he runs our example application and quits.
 
@@ -103,7 +103,7 @@ Figure~\ref{Fig:cli2} is a screenshot of the CLI when a ``guest'' user runs the
 same commands as the user in Figure~\ref{Fig:cli}. The user does not have
 permissions to do anything other than view what applications are available and
 attempt to run an application. The guest user is not part of a group which is
-allowed to run the example application so when the user tries to run it the
+allowed to run the example application, so when the user tries to run it, the
 system throws a MissingRolesException indicating that required roles were not
 available to the user.
 \subsection{Roles}
@@ -125,10 +125,10 @@ getColor() & gets the current color of the light bulb \\ \hline
 Roles are a set of interfaces. These interfaces are used to specify the
 functionality that is provided by a module. Table~\ref{tab:rolestable} gives an
 overview of the role supported by the Color-changing Light Bulb module. These
-roles play a major part when one component ( other than the management
-component) interacts with another component. The Management Component doesn't
-not have to worry about the specific functionality provided by a module and
-hence doesn't used the role interface.
+roles play a major part when one component (other than the Management
+Component) interacts with another component. The Management Component doesn't
+have to worry about the specific functionality provided by a module and hence
+doesn't used the role interface.
 \subsection{Access Control}
 \label{sec:access}
 Access control is divided into two types: core system access control and module
@@ -155,7 +155,7 @@ user's access level is greater than or equal to the minimum access level
 assigned to the command, the user is able to run the command.
 \subsubsection{Module Access Control}
 \label{sec:module_access}
-Module access control provides access control between modules, which are
+Module access control provides access control between modules which are
 discussed in more detail in Section~\ref{sec:modules}. The access control
 policies consist of a set of rules. These rules are set up by the user.
 
@@ -170,7 +170,7 @@ explicitly grants permission to a user to perform an action, with approval if
 necessary. If no rule is found for a scenario, the default action is taken,
 which is to not allow the action to occur.
 
-When a user tries to use a module (either directly or indirectly), the system
+When a user tries to use a module, either directly or indirectly, the system
 looks for a rule that applies to the use. If a rule is found where the source
 and destination modules match, then the system makes sure the current time and
 day of the week match the rule and the user is part of the user group assigned
@@ -180,14 +180,14 @@ or ``ask.'' When the mode is ``allow,'' the interaction is automatically
 allowed. When the mode is ``ask,'' a user is asked interactively to allow the
 interaction at the time of access. Our system currently does not support the
 priority or access mode portions of the rules (all accesses have equal priority
-and the access mode is considered to be ``allow''). If multiple rules to a given
-scenario, the permission given to the user is the union of the accesses.  For
-example, if a user is part of the groups ``Admin'' and ``Users'' and there is a
-rule that allows a ``User'' to access a module with permission and another rule
-that allows an ``Admin'' to access the same module automatically, access will be
-granted as an ``Admin'' instead of as a ``User.''
+and the access mode is considered to be ``allow''). If multiple rules apply to a
+given scenario, the permission given to the user is the union of the accesses.
+For example, if a user is part of the groups ``Admin'' and ``Users'' and there
+is a rule that allows a ``User'' to access a module with permission and another
+rule that allows an ``Admin'' to access the same module automatically, access
+will be granted as an ``Admin'' instead of as a ``User.''
 
 Users are able to query the system to either determine which modules a user can
-access at a given time, based on the groups he or she is in, or determine who
+access at a given time, based on the group(s) he or she is in, or determine who
 can access a given module. This allows the user to more reliably verify that the
 access granted fits his or her expectations.

@@ -17,9 +17,9 @@ describe each component in more detail.
 \label{sec:mgmt}
 The Management Component provides the core functionality and facilitates the
 interactions within the system. The Management Component provides a user
-interface for handling administrative tasks for the core system as well as
-component management. Administrative tasks includes tasks such as user and
-group setup and modification. Component Managment includes setting access
+interface for handling administrative tasks for the core system, as well as
+component management. Administrative tasks include tasks such as user and
+group setup and modification. Component Management includes setting access
 control rules for components, installing and uninstalling new components,
 activating and deactivating installed components, and resolving dependencies
 for components. 
@@ -36,7 +36,7 @@ Access Control is described in more detail in Section~\ref{sec:access}.
 \begin{figure}[tbh]                                                              
     \centering                                                                   
     \includegraphics[width=1.0\columnwidth]{figs/appcode.png}                       
-    \caption{Example application code snippet}                                  
+    \caption{Example Application Code Snippet}                                  
     \label{Fig:appcode}                                                             
 \end{figure} 
 While the Management Component provides the core functionality of the system,
@@ -45,8 +45,8 @@ interactions between users and other components (besides the Management
 Component). For instance, an application could turn on a light when a door is
 unlocked.
 
-The Applications are built as modules which are then are individually loaded
-into the system. The Applications code is developed against our system.
+The Applications are built as modules which are then individually loaded into
+the system. The Applications code is developed and built against our system.
 Figure~\ref{Fig:appcode} shows a snippet of the code of the example application
 that we developed. The application developer does not have to worry about which
 protocol the light bulb uses to communicate, which manufacturer built that light
@@ -56,7 +56,7 @@ bulb, etc.
 Devices provide interaction capability with the physical environment. Each
 device is accessed through a device driver module which is loaded into the
 system. These modules are also responsible for interacting with the
-communication protocol modules. As described in Section~\ref{sec:protocols}.
+communication protocol modules, as described in Section~\ref{sec:protocols}.
 Physical devices can include various types of sensors, light bulbs, door locks,
 etc. Our device abstraction takes care of the heterogeneity that can exist with
 the physical devices. Other parts of the system that communicate with Devices
@@ -84,7 +84,7 @@ A role is an interface that describes the functionality a module can provide.
 For example, a module implementing the ``light bulb'' role will provide functions
 for turning on and off a light bulb. Roles play a critical role when two
 modules interact. For example, if an application wants to turn on a light bulb,
-the application requests a module that implements the ``"light bulb'' role from 
+the application requests a module that implements the ``light bulb'' role from 
 the Management Component. At this point, the Management Component searches for a
 loaded module which implements that role and checks whether or not the
 requesting module is allowed to access the module implementing the role. If the
